@@ -1,6 +1,8 @@
 package com.example.catflix_android;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,15 +22,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = Room.databaseBuilder(
-                getApplicationContext(),
-                AppDB.class,
-                "MoviesDB")
-                .allowMainThreadQueries()
-                .build();
-        movieDao = db.movieDao();
-        Movie newMovie = new Movie("132","hazan","18",false,"hazan desc","hazna path","kaki",
-                "hazan","hazan","hazan categpry","today","hazan name");
+//        db = Room.databaseBuilder(
+//                getApplicationContext(),
+//                AppDB.class,
+//                "MoviesDB")
+//                .allowMainThreadQueries()
+//                .build();
+//        movieDao = db.movieDao();
+//        Movie newMovie = new Movie("132","hazan","18",false,"hazan desc","hazna path","kaki",
+//                "hazan","hazan","hazan categpry","today","hazan name");
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -37,5 +39,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Button button = findViewById(R.id.button);
+
+        // Set an OnClickListener to navigate to LoginActivity
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, com.example.catflix_android.LoginActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
