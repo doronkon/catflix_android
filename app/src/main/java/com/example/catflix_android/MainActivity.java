@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         db = Room.databaseBuilder(
                 getApplicationContext(),
                 AppDB.class,
-                "MoviesDB"
-                ).allowMainThreadQueries()
+                "MoviesDB")
+                .allowMainThreadQueries()
                 .build();
         movieDao = db.movieDao();
         Movie newMovie = new Movie("132","hazan","18",false,"hazan desc","hazna path","kaki",

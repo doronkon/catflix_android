@@ -15,8 +15,8 @@ public interface UserDao {
     @Query("SELECT * FROM users")
     List<User> index();
 
-    @Query("SELECT * FROM users WHERE _id=:_id")
-    User get(String _id);
+    @Query("SELECT * FROM users WHERE _id=:id")
+    User get(String id);
 
     @Insert
     void insert(User...users);

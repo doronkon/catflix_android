@@ -15,8 +15,8 @@ public interface CategoryDao {
     @Query("SELECT * FROM categories")
     List<Category> index();
 
-    @Query("SELECT * FROM categories WHERE _id=:_id")
-    Category get(String _id);
+    @Query("SELECT * FROM categories WHERE _id=:id")
+    Category get(String id);
 
     @Insert
     void insert(Category...categories);

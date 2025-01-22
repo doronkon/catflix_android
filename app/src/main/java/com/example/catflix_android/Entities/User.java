@@ -20,11 +20,11 @@ public class User {
     private String password;
     private String email;
     private String image;
-    private ArrayList<Movie> moviesWatched;
+    //private ArrayList<Movie> moviesWatched;
 
-    public User(String _id,ArrayList<Movie> moviesWatched, String image, String email, String password, String displayName, String name, boolean admin) {
+    public User(String _id, String image, String email, String password, String displayName, String name, boolean admin) {
         this._id = _id;
-        this.moviesWatched = moviesWatched;
+        ///this.moviesWatched = moviesWatched;
         this.image = image;
         this.email = email;
         this.password = password;
@@ -60,9 +60,9 @@ public class User {
         return image;
     }
 
-    public ArrayList<Movie> getMoviesWatched() {
-        return moviesWatched;
-    }
+//    public ArrayList<Movie> getMoviesWatched() {
+//        return moviesWatched;
+//    }
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
@@ -80,11 +80,11 @@ public class User {
         this.image = image;
     }
 
-    public void setMoviesWatched(Movie movie) {
-        if(!this.moviesWatched.contains(movie)){
-            this.moviesWatched.add(movie);
-        }
-    }
+//    public void setMoviesWatched(Movie movie) {
+//        if(!this.moviesWatched.contains(movie)){
+//            this.moviesWatched.add(movie);
+//        }
+//    }
 
     @Override
     public String toString() {
@@ -95,7 +95,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", image='" + image + '\'' +
-                ", moviesWatched=" + moviesWatched +
+//                ", moviesWatched=" + moviesWatched +
                 '}';
     }
 }
