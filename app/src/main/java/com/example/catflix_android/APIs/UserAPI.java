@@ -13,6 +13,10 @@ import com.example.catflix_android.WebServices.UserWebService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -66,9 +70,13 @@ public class UserAPI {
                     try {
                         // Get the error message from the response body
                         String errorMessage = response.errorBody().string();
+                        JSONObject errorObject = new JSONObject(errorMessage);
+                        JSONArray errorsArray = errorObject.getJSONArray("errors");
+                        errorMessage = errorsArray.getString(0);
+
                         // Show a Toast with the error message
                         Toast.makeText(context, "Error: " + errorMessage, Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
+                    } catch (IOException | JSONException e) {
                         // Handle error if errorBody cannot be converted to string
                         e.printStackTrace();
                         Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
