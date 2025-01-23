@@ -2,6 +2,7 @@ package com.example.catflix_android.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.bumptech.glide.Glide;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.UserViewModel;
@@ -39,7 +41,18 @@ public class ProfileActivity extends AppCompatActivity {
             public void onChanged(User user) {
                 if (user != null) {
                     textBoxDisplayName.setText("HEY THERE, "+user.getDisplayName());
+                    ImageView imageView = findViewById(R.id.imageView);
+                    String url = user.getImage();
+                    if(url.charAt(0)=='.')
+                    {
+                        url=url.substring(url.lastIndexOf('/')+1);
+                    }
+                    String imageUrl = "http://10.0.2.2:8080/media/userLogos/" + url;
 
+
+                    Glide.with(com.example.catflix_android.Activities.ProfileActivity.this)
+                            .load(imageUrl)
+                            .into(imageView);
                 } else {
                     //onFailure/404,403....
                 }
