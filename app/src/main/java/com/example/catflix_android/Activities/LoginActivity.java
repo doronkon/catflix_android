@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.LoginResponse;
+import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.UserViewModel;
 
@@ -49,8 +50,9 @@ public class LoginActivity extends AppCompatActivity {
 //(this).get(UserViewModel.class)
 
             if (!username.isEmpty() && !password.isEmpty()) {
+                LoginUser loginUser = new LoginUser(username,password);
 
-                UserViewModel model = new UserViewModel(this,this,username,password);
+                UserViewModel model = new UserViewModel(this,this);
                 MutableLiveData<LoginResponse> loggedUser= new MutableLiveData<>();
                 loggedUser.observe(this, new Observer<LoginResponse>() {
                     @Override
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                             // For example:
                             String userId = loginResponse.getId();
                             String token = loginResponse.getToken();
-                            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                             startActivity(intent);
                         } else {
                             System.out.println("ima shelha");
@@ -70,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-                model.login(loggedUser);
+                model.login(loggedUser,loginUser);
 
             } else {
                 System.out.println("aaa");

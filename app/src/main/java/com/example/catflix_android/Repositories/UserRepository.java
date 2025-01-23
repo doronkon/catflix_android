@@ -9,11 +9,10 @@ import com.example.catflix_android.APIs.UserAPI;
 import com.example.catflix_android.AppDB;
 import com.example.catflix_android.Daos.UserDao;
 import com.example.catflix_android.DataTypes.LoginResponse;
+import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.Entities.User;
 
 public class UserRepository {
-    private String name;
-    private String password;
     private UserDao dao;
     private UserData userData;
     private UserAPI api;
@@ -21,10 +20,8 @@ public class UserRepository {
 
     private LifecycleOwner owner;
 
-    public UserRepository(Context context, LifecycleOwner owner, String name,String password) {
-        this.name = name;
+    public UserRepository(Context context, LifecycleOwner owner) {
         this.context = context;
-        this.password = password;
         api = new UserAPI();
         userData = new UserData();
         AppDB database = AppDB.getInstance(context);
@@ -59,11 +56,14 @@ public class UserRepository {
         return userData;
     }
 
-    public void login(MutableLiveData<LoginResponse> loggedUser) {
-        this.api.login(loggedUser,name,password,context);
+    public void login(MutableLiveData<LoginResponse> loggedUser, LoginUser loginUser) {
+        this.api.login(loggedUser,loginUser,context);
     }
 
     public void signUp(MutableLiveData<User> userResponse, User userCreate) {
         this.api.signUp(userResponse, userCreate, context);
+    }
+    public void getUser(MutableLiveData<User> userResponse) {
+        this.api.getUser(userResponse, context);
     }
 }

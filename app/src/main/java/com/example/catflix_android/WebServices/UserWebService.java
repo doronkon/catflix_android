@@ -5,7 +5,10 @@ import com.example.catflix_android.Entities.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface  UserWebService {
     @POST("tokens")
@@ -13,4 +16,6 @@ public interface  UserWebService {
 
     @POST("users")
     public Call<User> signUp(@Body User userCreate);
+    @GET("users/{id}")
+    public Call<User> getUser(@Header("user") String token, @Path("id") String id);
 }

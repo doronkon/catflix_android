@@ -42,8 +42,7 @@ public class UserAPI {
         webService = retrofit.create(UserWebService.class);
     }
 
-    public void login(MutableLiveData<LoginResponse> loggedUser, String name, String password,Context context) {
-        LoginUser loginUser = new LoginUser(name, password);
+    public void login(MutableLiveData<LoginResponse> loggedUser, LoginUser loginUser,Context context) {
         Call<LoginResponse> call = webService.login(loginUser);
 
         call.enqueue(new Callback<LoginResponse>() {
@@ -114,6 +113,49 @@ public class UserAPI {
                 if (response.isSuccessful() && response.body() != null) {
                     User createdUser = response.body();
                     userResponse.setValue(createdUser);
+
+                } else {
+                    try {
+                        // Get the error message from the response body
+                        String errorMessage = response.errorBody().string();
+                        JSONObject errorObject = new JSONObject(errorMessage);
+                        JSONArray errorsArray = errorObject.getJSONArray("errors");
+                        errorMessage = errorsArray.getString(0);
+
+                        // Show a Toast with the error message
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (IOException | JSONException e) {
+                        // Handle error if errorBody cannot be converted to string
+                        e.printStackTrace();
+                        Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+                    }
+                    // Handle HTTP error responses
+                    // Example: Log error or show a toast
+                    userResponse.setValue(null);
+
+                    System.err.println("API Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                userResponse.setValue(null);
+
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+    public void getUser(MutableLiveData<User> userResponse,Context context) {
+        String id = DataManager.getCurrentUserId();
+        String token = DataManager.getTokenHeader();
+        Call<User> call = webService.getUser(token,id);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User exisitingUser = response.body();
+                    userResponse.setValue(exisitingUser);
 
                 } else {
                     try {

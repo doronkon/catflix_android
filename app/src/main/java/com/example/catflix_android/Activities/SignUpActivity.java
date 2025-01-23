@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             if (!name.isEmpty() && !password.isEmpty() && !displayName.isEmpty() && !email.isEmpty()) {
 
-                UserViewModel model = new UserViewModel(this,this,name,password);
+                UserViewModel model = new UserViewModel(this,this);
                 MutableLiveData<User> userResponse= new MutableLiveData<>();
                 userResponse.observe(this, new Observer<User>() {
                     @Override

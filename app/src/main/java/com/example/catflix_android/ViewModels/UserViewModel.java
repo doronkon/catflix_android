@@ -9,23 +9,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.catflix_android.DataTypes.LoginResponse;
+import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.Repositories.UserRepository;
 public class UserViewModel extends ViewModel {
     private final Context context;
 
-    private String name;
-    private String password;
 
     private MutableLiveData<User> user;
 
     private UserRepository repository;
 
-    public UserViewModel(Context context, LifecycleOwner owner,String name,String password){
-        this.name = name;
-        this.password = password;
+    public UserViewModel(Context context, LifecycleOwner owner){
         this.context = context;
-        this.repository = new UserRepository(context,owner,name,password);
+        this.repository = new UserRepository(context,owner);
         Log.i("TAG","viewModel Constructor print");
     }
     public MutableLiveData<User> getUserData(){
@@ -34,13 +31,13 @@ public class UserViewModel extends ViewModel {
         }
         return user;
     }
-    public void getUser(String username) {
-        repository.getUser(username);
+    public void getUser(MutableLiveData<User> userResponse) {
+        repository.getUser(userResponse);
     }
-    public void login(MutableLiveData<LoginResponse> loggedUser) {
+    public void login(MutableLiveData<LoginResponse> loggedUser, LoginUser loginUser) {
         Log.i("TAG","viewModel Login print");
 
-        this.repository.login(loggedUser);
+        this.repository.login(loggedUser,loginUser);
     }
 
     public void signUp(MutableLiveData<User> userResponse, User userCreate) {
