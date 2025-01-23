@@ -7,20 +7,12 @@ import com.example.catflix_android.LoginActivity;
 
 
 public class DataManager {
-    private static String currentUserID;
-    private static Boolean isAdmin;
+    private static String currentUserID = null;
+    private static Boolean isAdmin = null;
 
-    private static String token;
+    private static String token = null;
     private static DataManager instance;
-    private static boolean initialized;
 
-    public static boolean isInitialized() {
-        return initialized;
-    }
-
-    public static void setInitialized(boolean initialized) {
-        DataManager.initialized = initialized;
-    }
 
     public static void setToken(String newToken) {
         token = newToken;

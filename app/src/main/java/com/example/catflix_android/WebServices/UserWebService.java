@@ -5,12 +5,11 @@ import com.example.catflix_android.Entities.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
-public class UserWebService {
+public interface  UserWebService {
     @POST("tokens")
-    public Call<LoginResponse> login(@Body LoginUser loginUser)
-    {
-        return null;
-    }
+    public Call<LoginResponse> login(@Body LoginUser loginUser);
 }

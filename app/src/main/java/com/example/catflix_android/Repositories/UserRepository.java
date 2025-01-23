@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.catflix_android.APIs.UserAPI;
 import com.example.catflix_android.AppDB;
 import com.example.catflix_android.Daos.UserDao;
+import com.example.catflix_android.Entities.LoginResponse;
 import com.example.catflix_android.Entities.User;
 
 public class UserRepository {
@@ -55,7 +56,7 @@ public class UserRepository {
         return userData;
     }
 
-    public void login() {
-        this.api.login(userData,name,password);
+    public void login(MutableLiveData<LoginResponse> loggedUser) {
+        this.api.login(loggedUser,name,password);
     }
 }
