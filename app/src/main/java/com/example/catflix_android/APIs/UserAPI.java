@@ -75,7 +75,7 @@ public class UserAPI {
                         errorMessage = errorsArray.getString(0);
 
                         // Show a Toast with the error message
-                        Toast.makeText(context, "Error: " + errorMessage, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
                     } catch (IOException | JSONException e) {
                         // Handle error if errorBody cannot be converted to string
                         e.printStackTrace();
@@ -103,4 +103,50 @@ public class UserAPI {
             }
         });
     }
+
+
+    public void signUp(MutableLiveData<User> userResponse, User userCreate,Context context) {
+        Call<User> call = webService.signUp(userCreate);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User createdUser = response.body();
+                    userResponse.setValue(createdUser);
+
+                } else {
+                    try {
+                        // Get the error message from the response body
+                        String errorMessage = response.errorBody().string();
+                        JSONObject errorObject = new JSONObject(errorMessage);
+                        JSONArray errorsArray = errorObject.getJSONArray("errors");
+                        errorMessage = errorsArray.getString(0);
+
+                        // Show a Toast with the error message
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (IOException | JSONException e) {
+                        // Handle error if errorBody cannot be converted to string
+                        e.printStackTrace();
+                        Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+                    }
+                    // Handle HTTP error responses
+                    // Example: Log error or show a toast
+                    userResponse.setValue(null);
+
+                    System.err.println("API Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                userResponse.setValue(null);
+
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+
+
+
 }

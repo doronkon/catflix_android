@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set an OnClickListener to navigate to LoginActivity
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, com.example.catflix_android.LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, com.example.catflix_android.SignUpActivity.class);
             startActivity(intent);
         });
 

@@ -62,4 +62,8 @@ public class UserRepository {
     public void login(MutableLiveData<LoginResponse> loggedUser) {
         this.api.login(loggedUser,name,password,context);
     }
+
+    public void signUp(MutableLiveData<User> userResponse, User userCreate) {
+        this.api.signUp(userResponse, userCreate, context);
+    }
 }

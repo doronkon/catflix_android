@@ -43,6 +43,10 @@ public class UserViewModel extends ViewModel {
         this.repository.login(loggedUser);
     }
 
+    public void signUp(MutableLiveData<User> userResponse, User userCreate) {
+        Log.i("TAG","viewModel signup print");
 
+        this.repository.signUp(userResponse,userCreate);
+    }
 
 }
