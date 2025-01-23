@@ -6,8 +6,8 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.catflix_android.DataManager;
-import com.example.catflix_android.Entities.LoginResponse;
-import com.example.catflix_android.Entities.LoginUser;
+import com.example.catflix_android.DataTypes.LoginResponse;
+import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.WebServices.UserWebService;
 import com.google.gson.Gson;

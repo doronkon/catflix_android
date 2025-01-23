@@ -1,10 +1,5 @@
 package com.example.catflix_android;
 
-import android.content.Context;
-import android.content.Intent;
-
-import com.example.catflix_android.LoginActivity;
-
 
 public class DataManager {
     private static String currentUserID = null;
@@ -19,7 +14,7 @@ public class DataManager {
     }
 
     public static String getTokenHeader() {
-        return token != null ? "Bearer " + token : null;
+        return token != null ? token : null;
     }
 
 

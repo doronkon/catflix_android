@@ -1,4 +1,4 @@
-package com.example.catflix_android.Entities;
+package com.example.catflix_android.DataTypes;
 
 public class LoginUser {
     private String user;

@@ -1,4 +1,4 @@
-package com.example.catflix_android;
+package com.example.catflix_android.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.example.catflix_android.Entities.LoginResponse;
 import com.example.catflix_android.Entities.User;
+import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.UserViewModel;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -57,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onChanged(User user) {
                         if (user != null) {
                             System.out.println("Kill me");
-                                Intent intent = new Intent(SignUpActivity.this, com.example.catflix_android.LoginActivity.class);
+                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                                 startActivity(intent);
                         } else {
                             System.out.println("ima shelha");

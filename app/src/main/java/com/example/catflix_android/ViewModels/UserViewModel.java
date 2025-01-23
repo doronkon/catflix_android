@@ -8,7 +8,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.catflix_android.Entities.LoginResponse;
+import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.Repositories.UserRepository;
 public class UserViewModel extends ViewModel {

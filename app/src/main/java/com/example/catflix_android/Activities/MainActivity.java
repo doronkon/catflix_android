@@ -1,4 +1,4 @@
-package com.example.catflix_android;
+package com.example.catflix_android.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.room.Room;
 
+import com.example.catflix_android.AppDB;
 import com.example.catflix_android.Daos.MovieDao;
-import com.example.catflix_android.Entities.Movie;
+import com.example.catflix_android.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set an OnClickListener to navigate to LoginActivity
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, com.example.catflix_android.SignUpActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 

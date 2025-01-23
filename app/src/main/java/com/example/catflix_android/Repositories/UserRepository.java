@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.catflix_android.APIs.UserAPI;
 import com.example.catflix_android.AppDB;
 import com.example.catflix_android.Daos.UserDao;
-import com.example.catflix_android.Entities.LoginResponse;
+import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.Entities.User;
 
 public class UserRepository {

@@ -1,21 +1,21 @@
-package com.example.catflix_android;
+package com.example.catflix_android.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.catflix_android.Entities.LoginResponse;
+import com.example.catflix_android.DataManager;
+import com.example.catflix_android.DataTypes.LoginResponse;
+import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,13 +56,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(LoginResponse loginResponse) {
                         if (loginResponse != null) {
-                            String x =DataManager.getCurrentUserId();
+                            String x = DataManager.getCurrentUserId();
 
                             // Handle the response, update UI with loginResponse data
                             // For example:
                             String userId = loginResponse.getId();
                             String token = loginResponse.getToken();
-                            // update UI or navigate
+                            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                            startActivity(intent);
                         } else {
                             System.out.println("ima shelha");
                             // Handle error or failure case
