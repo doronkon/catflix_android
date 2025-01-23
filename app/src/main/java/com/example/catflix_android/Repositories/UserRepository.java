@@ -17,10 +17,13 @@ public class UserRepository {
     private UserDao dao;
     private UserData userData;
     private UserAPI api;
+    private Context context;
+
     private LifecycleOwner owner;
 
     public UserRepository(Context context, LifecycleOwner owner, String name,String password) {
         this.name = name;
+        this.context = context;
         this.password = password;
         api = new UserAPI();
         userData = new UserData();
@@ -57,6 +60,6 @@ public class UserRepository {
     }
 
     public void login(MutableLiveData<LoginResponse> loggedUser) {
-        this.api.login(loggedUser,name,password);
+        this.api.login(loggedUser,name,password,context);
     }
 }

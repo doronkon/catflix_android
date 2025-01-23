@@ -1,6 +1,7 @@
 package com.example.catflix_android.APIs;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -11,6 +12,8 @@ import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.WebServices.UserWebService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +38,7 @@ public class UserAPI {
         webService = retrofit.create(UserWebService.class);
     }
 
-    public void login(MutableLiveData<LoginResponse> loggedUser, String name, String password) {
+    public void login(MutableLiveData<LoginResponse> loggedUser, String name, String password,Context context) {
         LoginUser loginUser = new LoginUser(name, password);
         Call<LoginResponse> call = webService.login(loginUser);
 
@@ -59,9 +62,21 @@ public class UserAPI {
                     DataManager.setCurrentUserID(null);
                     DataManager.setIsAdmin(null);
                     DataManager.setToken(null);
-                    loggedUser.setValue(null);
+                    // Show a Toast message with the error response
+                    try {
+                        // Get the error message from the response body
+                        String errorMessage = response.errorBody().string();
+                        // Show a Toast with the error message
+                        Toast.makeText(context, "Error: " + errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        // Handle error if errorBody cannot be converted to string
+                        e.printStackTrace();
+                        Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+                    }
                     // Handle HTTP error responses
                     // Example: Log error or show a toast
+                    loggedUser.setValue(null);
+
                     System.err.println("API Error: " + response.code());
                 }
             }
