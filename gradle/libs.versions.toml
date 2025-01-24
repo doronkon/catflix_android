@@ -1,4 +1,5 @@
 [versions]
+coreKtx = "1.10.1"
 glide = "4.15.1"
 retrofit = "2.9.0"
 gson = "2.10.1"
@@ -16,6 +17,7 @@ roomCompiler = "2.6.1"
 annotation = "1.6.0"
 lifecycleLivedataKtx = "2.8.0"
 lifecycleViewmodelKtx = "2.8.0"
+lifecycleExtensions = "2.2.0"
 firebaseFirestore = "25.1.1"
 
 [libraries]
@@ -37,8 +39,10 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycleExtensions" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-

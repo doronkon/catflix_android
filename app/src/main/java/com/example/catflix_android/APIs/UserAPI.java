@@ -146,7 +146,7 @@ public class UserAPI {
             }
         });
     }
-    public void getUser(MutableLiveData<User> userResponse,Context context) {
+    public void getCurrentUser(MutableLiveData<User> userResponse,Context context) {
         String id = DataManager.getCurrentUserId();
         String token = DataManager.getTokenHeader();
         Call<User> call = webService.getUser(token,id);

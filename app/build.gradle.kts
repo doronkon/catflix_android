@@ -9,6 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.example.catflix_android"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

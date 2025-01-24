@@ -22,18 +22,21 @@ import com.example.catflix_android.ViewModels.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     private UserViewModel userViewModel;
+    private LocalDataViewModel model2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         // Find views
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
-
+        model2 = new LocalDataViewModel(this,this);
 
         // Enable Edge-to-Edge
         EdgeToEdge.enable(this);
@@ -55,27 +58,16 @@ public class LoginActivity extends AppCompatActivity {
                 LoginUser loginUser = new LoginUser(username,password);
 
                 UserViewModel model = new UserViewModel(this,this);
-                LocalDataViewModel model2 = new LocalDataViewModel(this,this);
                 MutableLiveData<LoginResponse> loggedUser= new MutableLiveData<>();
-                loggedUser.observe(this, new Observer<LoginResponse>() {
-                    @Override
-                    public void onChanged(LoginResponse loginResponse) {
-                        if (loginResponse != null) {
-                            String x = DataManager.getCurrentUserId();
+                loggedUser.observe(this, loginResponse -> {
+                    if (loginResponse != null) {
+                        //po
+                        model2.init();
+                        //it's a flag for init
 
-                            // Handle the response, update UI with loginResponse data
-                            // For example:
-                            String userId = loginResponse.getId();
-                            String token = loginResponse.getToken();
-                            //po
-                            model2.init();
-
-                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                            startActivity(intent);
-                        } else {
-                            System.out.println("ima shelha");
-                            // Handle error or failure case
-                        }
+                    } else {
+                        System.out.println("ima shelha");
+                        // Handle error or failure case
                     }
                 });
                 model.login(loggedUser,loginUser);
@@ -86,5 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                 // Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             }
         });
+        model2.getInitComplete().observe(this,val->{
+            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
