@@ -23,6 +23,8 @@ public interface UserDao {
 
     @Delete
     void delete(User...users);
+    @Query("DELETE from users")
+    void deleteAll();
 
     @Update
     void update(User...users);

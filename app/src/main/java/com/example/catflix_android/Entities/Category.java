@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 @Entity(
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 public class Category {
     @PrimaryKey
     @NonNull
+    @SerializedName("_id")
     private String _id;
     private String name;
 

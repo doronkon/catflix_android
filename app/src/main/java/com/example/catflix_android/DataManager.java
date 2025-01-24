@@ -5,9 +5,15 @@ public class DataManager {
     private static String currentUserID = null;
     private static Boolean isAdmin = null;
 
+    private static Boolean intialized = false;
+
+
     private static String token = null;
     private static DataManager instance;
 
+    public static Boolean getIntialized() {
+        return intialized;
+    }
 
     public static void setToken(String newToken) {
         token = newToken;

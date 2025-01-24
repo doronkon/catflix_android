@@ -3,6 +3,8 @@ import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.Entities.User;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,4 +20,6 @@ public interface  UserWebService {
     public Call<User> signUp(@Body User userCreate);
     @GET("users/{id}")
     public Call<User> getUser(@Header("user") String token, @Path("id") String id);
+    @GET("users/index/all")
+    public Call<List<User>> index();
 }

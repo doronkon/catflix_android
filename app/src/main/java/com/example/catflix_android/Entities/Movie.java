@@ -6,19 +6,22 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(
-        tableName = "movies",
-        foreignKeys = @ForeignKey(
-                entity = Category.class,
-                parentColumns = "_id",
-                childColumns = "category",
-                onDelete = ForeignKey.CASCADE
-        ),
-        indices = {@Index(value = "category")}
+        tableName = "movies"
+//        foreignKeys = @ForeignKey(
+//                entity = Category.class,
+//                parentColumns = "_id",
+//                childColumns = "category",
+//                onDelete = ForeignKey.CASCADE
+//        ),
+//        indices = {@Index(value = "category")}
 )
 public class Movie {
     @PrimaryKey
     @NonNull
+    @SerializedName("_id")
     private String _id;
     private String pathToMovie;
     private String name;

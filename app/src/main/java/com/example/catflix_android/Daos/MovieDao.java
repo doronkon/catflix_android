@@ -15,6 +15,7 @@ public interface MovieDao {
     @Query("SELECT * FROM movies")
     List<Movie> index();
 
+
     @Query("SELECT * FROM movies WHERE _id=:id")
     Movie get(String id);
 
@@ -23,6 +24,8 @@ public interface MovieDao {
 
     @Delete
     void delete(Movie...movies);
+    @Query("DELETE from movies")
+    void deleteAll();
 
     @Update
     void update(Movie...movies);

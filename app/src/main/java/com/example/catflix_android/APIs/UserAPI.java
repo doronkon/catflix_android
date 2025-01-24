@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -184,6 +185,47 @@ public class UserAPI {
             public void onFailure(Call<User> call, Throwable t) {
                 userResponse.setValue(null);
 
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public void index(MutableLiveData<List<User>> usersResponse, Context context) {
+        Call<List<User>> call = webService.index();
+
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<User> returnedUsers = response.body();
+                    usersResponse.setValue(returnedUsers);
+
+                } else {
+                    try {
+                        // Get the error message from the response body
+                        String errorMessage = response.errorBody().string();
+                        JSONObject errorObject = new JSONObject(errorMessage);
+                        JSONArray errorsArray = errorObject.getJSONArray("errors");
+                        errorMessage = errorsArray.getString(0);
+
+                        // Show a Toast with the error message
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (IOException | JSONException e) {
+                        // Handle error if errorBody cannot be converted to string
+                        e.printStackTrace();
+                        Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+                    }
+                    // Handle HTTP error responses
+                    // Example: Log error or show a toast
+                    usersResponse.setValue(null);
+
+                    System.err.println("API Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                usersResponse.setValue(null);
                 System.err.println("Network Error: " + t.getMessage());
             }
         });

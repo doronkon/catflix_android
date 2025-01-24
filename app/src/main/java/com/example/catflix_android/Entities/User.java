@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class User {
     @PrimaryKey
     @NonNull
+    @SerializedName("_id")
     private String _id;
     private boolean admin;
     private String name;

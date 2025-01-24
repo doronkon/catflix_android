@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.MoviesResponse;
+import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.WebServices.MovieWebService;
 import com.example.catflix_android.WebServices.UserWebService;
@@ -18,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,6 +79,46 @@ public class MovieAPI {
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 moviesResponse.setValue(null);
 
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+    public void index(MutableLiveData<List<Movie>> moviesResponse, Context context) {
+        Call<List<Movie>> call = webService.index();
+
+        call.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Movie> returnedMovies = response.body();
+                    moviesResponse.setValue(returnedMovies);
+
+                } else {
+                    try {
+                        // Get the error message from the response body
+                        String errorMessage = response.errorBody().string();
+                        JSONObject errorObject = new JSONObject(errorMessage);
+                        JSONArray errorsArray = errorObject.getJSONArray("errors");
+                        errorMessage = errorsArray.getString(0);
+
+                        // Show a Toast with the error message
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (IOException | JSONException e) {
+                        // Handle error if errorBody cannot be converted to string
+                        e.printStackTrace();
+                        Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+                    }
+                    // Handle HTTP error responses
+                    // Example: Log error or show a toast
+                    moviesResponse.setValue(null);
+
+                    System.err.println("API Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+                moviesResponse.setValue(null);
                 System.err.println("Network Error: " + t.getMessage());
             }
         });

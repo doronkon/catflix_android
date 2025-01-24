@@ -12,11 +12,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.R;
+import com.example.catflix_android.ViewModels.LocalDataViewModel;
 import com.example.catflix_android.ViewModels.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
+
 
         // Enable Edge-to-Edge
         EdgeToEdge.enable(this);
@@ -53,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginUser loginUser = new LoginUser(username,password);
 
                 UserViewModel model = new UserViewModel(this,this);
+                LocalDataViewModel model2 = new LocalDataViewModel(this,this);
                 MutableLiveData<LoginResponse> loggedUser= new MutableLiveData<>();
                 loggedUser.observe(this, new Observer<LoginResponse>() {
                     @Override
@@ -64,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                             // For example:
                             String userId = loginResponse.getId();
                             String token = loginResponse.getToken();
+                            //po
+                            model2.init();
+
                             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                             startActivity(intent);
                         } else {
