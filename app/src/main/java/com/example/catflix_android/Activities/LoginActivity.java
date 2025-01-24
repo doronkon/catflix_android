@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                             // For example:
                             String userId = loginResponse.getId();
                             String token = loginResponse.getToken();
-                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                             startActivity(intent);
                         } else {
                             System.out.println("ima shelha");

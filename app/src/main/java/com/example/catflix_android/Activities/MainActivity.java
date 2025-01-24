@@ -22,15 +22,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        db = Room.databaseBuilder(
-//                getApplicationContext(),
-//                AppDB.class,
-//                "MoviesDB")
-//                .allowMainThreadQueries()
-//                .build();
-//        movieDao = db.movieDao();
-//        Movie newMovie = new Movie("132","hazan","18",false,"hazan desc","hazna path","kaki",
-//                "hazan","hazan","hazan categpry","today","hazan name");
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
