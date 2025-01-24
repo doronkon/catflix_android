@@ -1,9 +1,9 @@
 package com.example.catflix_android.DataTypes;
 
-import com.example.catflix_android.Entities.Category;
 import com.example.catflix_android.Entities.Movie;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MoviesResponse {
     private List <CategoryHelper> promotedMovies;
@@ -20,5 +20,19 @@ public class MoviesResponse {
                 "promotedMovies=" + promotedMovies +
                 ", alreadyWatched=" + alreadyWatched +
                 '}';
+    }
+
+    public List<Movie> getCategoryMovies(String name){
+        for(int i = 0; i < promotedMovies.size(); i++){
+            CategoryHelper current = promotedMovies.get(i);
+            if (Objects.equals(current.getName(), name)){
+                return current.getMovies();
+            }
+        }
+        return null;
+    }
+
+    public List<Movie> getAlreadyWatched(){
+        return this.alreadyWatched;
     }
 }
