@@ -15,6 +15,7 @@ import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LocalDataRepository {
     private final MovieDao daoMovie;
@@ -43,7 +44,10 @@ public class LocalDataRepository {
 //            initialized.setValue(true);
 //            return;
 //        }
-    public void init() {
+    public void init(MutableLiveData<Boolean> initComplete) {
+        final int totalOperations = 2;  // There are 2 operations: inserting users and movies
+        final AtomicInteger completedOperations = new AtomicInteger(0);  // AtomicInteger for thread-safety
+
 
         Thread deleteThread = new Thread(() -> {this.daoUser.deleteAll();this.daoMovie.deleteAll();});
 // Wait for the delete thread to finish without blocking the main thread.
@@ -64,6 +68,9 @@ public class LocalDataRepository {
                 insertUsersThread.start();
                 try {
                     insertUsersThread.join();
+                    if (completedOperations.incrementAndGet() == totalOperations) {
+                        initComplete.postValue(true); // Notify ViewModel
+                    }
                 }catch (Exception ex) {
                     Log.w("THREAD ERROR", ex);
                     Thread.currentThread().interrupt();}
@@ -80,6 +87,9 @@ public class LocalDataRepository {
                 insertMoviesThread.start();
                 try {
                     insertMoviesThread.join();
+                    if (completedOperations.incrementAndGet() == totalOperations) {
+                        initComplete.postValue(true); // Notify ViewModel
+                    }
                 }catch (Exception ex)
                 {
                     Log.w("THREAD ERROR", ex);
