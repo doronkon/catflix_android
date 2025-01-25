@@ -15,4 +15,5 @@
     <string name="displayName">displayName</string>
     <string name="sign_up">sign up</string>
     <string name="watch_again">Watch again!</string>
+    <string name="chooseImage">choose image</string>
 </resources>
