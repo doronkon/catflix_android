@@ -17,6 +17,7 @@ public class CurrentUserViewModel extends ViewModel {
     public CurrentUserViewModel(Context context, LifecycleOwner owner){
         this.repository = new UserRepository(context,owner);
         currentUser = this.repository.getCurrentUser();
+
     }
 
     public LiveData<User> getCurrentUser() {
