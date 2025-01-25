@@ -35,7 +35,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
             //init fields of movie
             TextView currentID = findViewById(R.id.currentID);
             currentID.setText(movie.get_id());
-            int x=9;
             //more fields
         });
         currentMovieViewModel.fetchCurrentMovie(movieId);
