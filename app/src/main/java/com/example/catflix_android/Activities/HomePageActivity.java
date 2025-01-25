@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.catflix_android.Adapters.CategoryAdapter;
 import com.example.catflix_android.Adapters.MovieAdapter;
+import com.example.catflix_android.DataTypes.CategoryHelper;
 import com.example.catflix_android.DataTypes.MoviesResponse;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.R;
@@ -25,6 +27,8 @@ public class HomePageActivity extends AppCompatActivity {
 
     private RecyclerView returnedMoviesRecyclerView;
     private MovieAdapter movieAdapter;
+    private RecyclerView categoryRecyclerView;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +43,22 @@ public class HomePageActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize RecyclerView
+        // Initialize alreadyWatched RecyclerView
         returnedMoviesRecyclerView = findViewById(R.id.movieList);
-
-        // Set the layout manager to horizontal
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         returnedMoviesRecyclerView.setLayoutManager(layoutManager);
 
-        // Optionally add a snap effect to the RecyclerView
+        // Optionally add a snap effect to the alreadyWatched RecyclerView
         LinearSnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(returnedMoviesRecyclerView);
 
-        // Initialize Adapter
+        // Initialize alreadyWatched Adapter
         movieAdapter = new MovieAdapter(this);
-
-        // Set adapter to RecyclerView
         returnedMoviesRecyclerView.setAdapter(movieAdapter);
+
+        // Initialize the RecyclerView for promotedMovies
+        categoryRecyclerView = findViewById(R.id.categoryRecyclerView);
+        categoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize ViewModel and observe MoviesResponse
         MovieViewModel model = new MovieViewModel(this, this);
@@ -63,12 +67,14 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onChanged(MoviesResponse returnedMovies) {
                 if (returnedMovies != null) {
-                    // Extract alreadyWatched movies
+                    // Handle alreadyWatched movies
                     List<Movie> alreadyWatchedMovies = returnedMovies.getAlreadyWatched();
-
-                    // Update adapter with the alreadyWatched movies
                     movieAdapter.setMovieResponse(alreadyWatchedMovies);
 
+                    // Handle promotedMovies categories
+                    List<CategoryHelper> promotedMovies = returnedMovies.getPromotedMovies();
+                    categoryAdapter = new CategoryAdapter(HomePageActivity.this, promotedMovies);
+                    categoryRecyclerView.setAdapter(categoryAdapter);
                 } else {
                     // Log or handle null response appropriately
                     System.out.println("Movies response is null");
@@ -79,5 +85,4 @@ public class HomePageActivity extends AppCompatActivity {
         // Trigger the HTTP request to fetch movies
         model.getMovies(movieResponse);
     }
-
 }

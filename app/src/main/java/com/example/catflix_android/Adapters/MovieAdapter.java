@@ -18,12 +18,11 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    static class MovieViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
-        private TextView description;
         private ImageView thumbnail;
 
-        private MovieViewHolder(View itemView) {
+        MovieViewHolder(View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.name);
             this.thumbnail = itemView.findViewById(R.id.thumbnail);

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             //po
                             model2.init();
 
-                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                             startActivity(intent);
                         } else {
                             System.out.println("ima shelha");
