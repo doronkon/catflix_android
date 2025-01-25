@@ -1,6 +1,7 @@
 package com.example.catflix_android.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide; // Add Glide dependency in build.gradle
+import com.bumptech.glide.Glide;
+import com.example.catflix_android.Activities.MovieDetailsActivity;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.R;
 
@@ -19,20 +21,45 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     static class MovieViewHolder extends RecyclerView.ViewHolder {
-        private TextView name;
-        private ImageView thumbnail;
+        private final TextView name;
+        private final ImageView thumbnail;
 
         MovieViewHolder(View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.name);
             this.thumbnail = itemView.findViewById(R.id.thumbnail);
         }
+
+        void bind(Movie movie, Context context) {
+            // Set name
+            name.setText(movie.getName() != null ? movie.getName() : "Unknown");
+
+            // Construct the full image URL
+            String url = movie.getThumbnail();
+            String imageUrl = "http://10.0.2.2:8080/media/movieThumbnails/" + url;
+
+            // Use Glide to load the image
+            Glide.with(thumbnail.getContext())
+                    .load(imageUrl)
+                    .into(thumbnail);
+
+            // Set click listener
+            itemView.setOnClickListener(v -> {
+                // Navigate to MovieDetailsActivity
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                intent.putExtra("movie", movie); // Pass the movie object (ensure Movie implements Serializable)
+                intent.putExtra("movie_id", movie.get_id()); // Pass the _id as an extra
+                context.startActivity(intent);
+            });
+        }
     }
 
     private final LayoutInflater inflater;
+    private final Context context;
     private List<Movie> movieList;
 
     public MovieAdapter(Context context) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -47,21 +74,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         if (movieList != null) {
             Movie current = movieList.get(position);
-
-            // Set name and description
-            holder.name.setText(current.getName() != null ? current.getName() : "Unknown");
-
-            // Construct the full image URL
-            String url = current.getThumbnail();
-            String imageUrl = "http://10.0.2.2:8080/media/movieThumbnails/" + url;
-
-            // Use Glide to load the image into the thumbnail ImageView
-            Glide.with(holder.thumbnail.getContext())
-                    .load(imageUrl)
-                    .into(holder.thumbnail);
+            holder.bind(current, context);
         }
     }
-
 
     public void setMovieResponse(List<Movie> response) {
         this.movieList = response;

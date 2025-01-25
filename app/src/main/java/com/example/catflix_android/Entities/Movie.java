@@ -2,11 +2,11 @@ package com.example.catflix_android.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 @Entity(
         tableName = "movies"
@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 //        ),
 //        indices = {@Index(value = "category")}
 )
-public class Movie {
+public class Movie implements Serializable {
     @PrimaryKey
     @NonNull
     @SerializedName("_id")
