@@ -1,7 +1,10 @@
 package com.example.catflix_android.Activities;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,46 @@ public class MovieDetailsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        //here changes
+        currentMovieViewModel = new CurrentMovieViewModel(this, this);
+
+
+        String movieId = getIntent().getStringExtra("movie_id");
+        currentMovieViewModel.getCurrentMovie().observe(this, movie->{
+            //init fields of movie
+            TextView currentID = findViewById(R.id.currentID);
+            currentID.setText(movie.get_id());
+            // Get the VideoView from the layout
+            VideoView videoView = findViewById(R.id.videoView);
+
+            // Construct the video URL
+            String baseUrl = "http://10.0.2.2:8080/media/actualMovies/";
+            String videoUrl = baseUrl + movie.getPathToMovie(); // Replace with your dynamic URL
+
+            // Set up the VideoView
+            Uri videoUri = Uri.parse(videoUrl);
+            videoView.setVideoURI(videoUri);
+
+            // Add MediaController for playback controls (optional)
+            MediaController mediaController = new MediaController(this);
+            mediaController.setAnchorView(videoView);
+            videoView.setMediaController(mediaController);
+
+            // Start the video playback
+            videoView.setOnPreparedListener(mp -> videoView.start());
+
+            // Handle errors (optional)
+            videoView.setOnErrorListener((mp, what, extra) -> {
+                // Log or show error message
+                return true;
+            });
+            //more fields
+        });
+        currentMovieViewModel.fetchCurrentMovie(movieId);
+
+
+        //worked before:
+        /*
         currentMovieViewModel = new CurrentMovieViewModel(this, this);
 
 
@@ -38,6 +81,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             //more fields
         });
         currentMovieViewModel.fetchCurrentMovie(movieId);
+         */
 
     }
 }
