@@ -1,12 +1,14 @@
 package com.example.catflix_android.APIs;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.MoviesResponse;
+import com.example.catflix_android.DataTypes.StringMovie;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.WebServices.MovieWebService;
@@ -123,4 +125,65 @@ public class MovieAPI {
             }
         });
     }
+
+
+    public void patchMovieForUser(String movie, Context context) {
+        StringMovie baruchHashem = new StringMovie(movie);
+        // Perform the first operation
+        webService.addToNode(DataManager.getCurrentUserId(), DataManager.getTokenHeader(), baruchHashem)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            // If successful, proceed with the second operation
+                            webService.addToCPP(DataManager.getTokenHeader(), movie)
+                                    .enqueue(new Callback<Void>() {
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            if (response.isSuccessful()) {
+                                                Toast.makeText(context, "Movie updated successfully", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                handleError(response, context);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
+                                            handleFailure(t, context);
+                                        }
+                                    });
+                        } else {
+                            handleError(response, context);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        handleFailure(t, context);
+                    }
+                });
+    }
+
+    // Method to handle error response from Retrofit
+    private void handleError(Response<?> response, Context context) {
+        try {
+            String errorMessage = response.errorBody().string();
+            JSONObject errorObject = new JSONObject(errorMessage);
+            JSONArray errorsArray = errorObject.getJSONArray("errors");
+            errorMessage = errorsArray.getString(0);
+
+            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // Method to handle failure
+    private void handleFailure(Throwable t, Context context) {
+        t.printStackTrace();
+        Toast.makeText(context, "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+
 }

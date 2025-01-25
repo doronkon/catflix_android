@@ -37,4 +37,8 @@ public class CurrentMovieViewModel extends ViewModel {
        this.repository.fetchCurrentMovie(movieID);
 
     }
+
+    public void patchMovieForUser(){
+        this.repository.patchMovieForUser();
+    }
 }

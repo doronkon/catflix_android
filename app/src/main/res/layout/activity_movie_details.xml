@@ -7,19 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MovieDetailsActivity">
 
+    <!-- Movie Thumbnail Image -->
+    <ImageView
+        android:id="@+id/movieThumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/movieName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        android:scaleType="centerCrop" />
 
+    <!-- Movie Name -->
     <TextView
-        android:id="@+id/currentID"
+        android:id="@+id/movieName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Movie Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/movieDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieThumbnail"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Movie Description -->
+    <TextView
+        android:id="@+id/movieDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Movie Description"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        app:layout_constraintBottom_toTopOf="@+id/watchMovieButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieName"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Watch Movie Button -->
+    <Button
+        android:id="@+id/watchMovieButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Watch Movie"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        app:layout_constraintTop_toBottomOf="@+id/movieDescription"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintVertical_bias="0.8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

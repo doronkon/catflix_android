@@ -48,4 +48,8 @@ public class MovieRepository {
         return this.currentMovie;
     }
 
+    public void patchMovieForUser() {
+        this.api.patchMovieForUser(this.currentMovie.getValue().get_id(),this.context);
+    }
+
 }
