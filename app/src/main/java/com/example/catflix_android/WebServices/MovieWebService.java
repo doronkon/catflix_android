@@ -30,4 +30,7 @@ public interface MovieWebService {
 
     @POST("movies/{id}/recommend")
     public Call<Void> addToCPP(@Header("user") String token, @Path("id") String id);
+
+    @GET("movies/{id}/recommend")
+    public Call<List<Movie>> getCppRecommendation(@Header("user") String token, @Path("id") String id);
 }

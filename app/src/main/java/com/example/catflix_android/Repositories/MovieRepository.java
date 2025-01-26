@@ -17,8 +17,11 @@ import com.example.catflix_android.DataTypes.MoviesResponse;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 
+import java.util.List;
+
 public class MovieRepository {
     private MutableLiveData<Movie> currentMovie;
+    private MutableLiveData<List<Movie>> currentRecommendation;
 
     private MovieDao dao;
     private MovieAPI api;
@@ -33,6 +36,11 @@ public class MovieRepository {
         dao = database.movieDao();
         this.owner = owner;
         currentMovie = new MutableLiveData<>();
+        currentRecommendation = new MutableLiveData<>();
+    }
+
+    public MutableLiveData<List<Movie>> getCurrentRecommendation() {
+        return currentRecommendation;
     }
 
     public void getMovies(MutableLiveData<MoviesResponse> moviesResponse){
@@ -52,4 +60,7 @@ public class MovieRepository {
         this.api.patchMovieForUser(this.currentMovie.getValue().get_id(),this.context);
     }
 
+    public void getCppRecommendation(String movieId){
+        this.api.getCppRecommendation(movieId, this.context, currentRecommendation);
+    }
 }

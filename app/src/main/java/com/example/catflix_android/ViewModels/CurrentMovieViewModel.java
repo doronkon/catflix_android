@@ -12,8 +12,12 @@ import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.Repositories.MovieRepository;
 import com.example.catflix_android.Repositories.UserRepository;
 
+import java.util.List;
+
 public class CurrentMovieViewModel extends ViewModel {
     MutableLiveData<Movie> currentMovie;
+
+    MutableLiveData <List<Movie>> currentRecommendation;
     private final MovieRepository repository;
     private LifecycleOwner owner;
 
@@ -40,5 +44,19 @@ public class CurrentMovieViewModel extends ViewModel {
 
     public void patchMovieForUser(){
         this.repository.patchMovieForUser();
+    }
+
+    public MutableLiveData<List<Movie>> getCurrentRecommendation() {
+        if(currentRecommendation == null){
+            currentRecommendation = new MutableLiveData<>();
+        }
+        return currentRecommendation;
+    }
+
+    public void getCppRecommendation(String movieID){
+        this.repository.getCppRecommendation(movieID);
+        this.repository.getCurrentRecommendation().observe(owner,recommendList -> {
+            this.currentRecommendation.setValue(recommendList);
+        });
     }
 }

@@ -168,6 +168,27 @@ public class MovieAPI {
                 });
     }
 
+    public void getCppRecommendation(String movieId, Context context, MutableLiveData <List<Movie>> currentRecommendation) {
+        webService.getCppRecommendation(DataManager.getTokenHeader(), movieId)
+                .enqueue(new Callback<List<Movie>>() {
+                    @Override
+                    public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            List<Movie> returnedMovies = response.body();
+                            currentRecommendation.setValue(returnedMovies);
+                        } else {
+                            handleError(response, context);
+                            currentRecommendation.setValue(null);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Movie>> call, Throwable t) {
+                        handleFailure(t, context);
+                        currentRecommendation.setValue(null);
+                    }
+                });
+    }
 
 
 

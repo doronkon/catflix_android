@@ -15,4 +15,7 @@
     <string name="displayName">displayName</string>
     <string name="sign_up">sign up</string>
     <string name="watch_again">Watch again!</string>
+    <string name="movie_description">Movie Description</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="watch_movie">Watch Movie</string>
 </resources>
