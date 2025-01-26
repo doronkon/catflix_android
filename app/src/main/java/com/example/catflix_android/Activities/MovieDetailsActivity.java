@@ -79,11 +79,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
         currentMovieViewModel.fetchCurrentMovie(movieId);
 
         // Fetch and observe recommendations
-        currentMovieViewModel.getCurrentRecommendation().observe(this, recommendedMovies -> {
-            if (recommendedMovies != null && !recommendedMovies.isEmpty()) {
-                movieAdapter.setMovieResponse(recommendedMovies);
-            }
-        });
-        currentMovieViewModel.getCppRecommendation(movieId);
+//        currentMovieViewModel.getCurrentRecommendation().observe(this, recommendedMovies -> {
+//            if (recommendedMovies != null && !recommendedMovies.isEmpty()) {
+//                movieAdapter.setMovieResponse(recommendedMovies);
+//            }
+//        });
+//        currentMovieViewModel.getCppRecommendation(movieId);
     }
 }
