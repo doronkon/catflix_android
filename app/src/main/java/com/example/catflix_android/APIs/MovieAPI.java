@@ -129,30 +129,17 @@ public class MovieAPI {
 
     public void patchMovieForUser(String movie, Context context) {
         StringMovie baruchHashem = new StringMovie(movie);
-        // Perform the first operation
+        patchInMongo(baruchHashem, context);
+        patchInCpp(movie,context);
+    }
+
+
+    public void patchInMongo(StringMovie baruchHashem, Context context){
         webService.addToNode(DataManager.getCurrentUserId(), DataManager.getTokenHeader(), baruchHashem)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
-                            // If successful, proceed with the second operation
-                            webService.addToCPP(DataManager.getTokenHeader(), movie)
-                                    .enqueue(new Callback<Void>() {
-                                        @Override
-                                        public void onResponse(Call<Void> call, Response<Void> response) {
-                                            if (response.isSuccessful()) {
-                                                Toast.makeText(context, "Movie updated successfully", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                handleError(response, context);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<Void> call, Throwable t) {
-                                            handleFailure(t, context);
-                                        }
-                                    });
-                        } else {
+                        if (!response.isSuccessful()) {
                             handleError(response, context);
                         }
                     }
@@ -163,6 +150,27 @@ public class MovieAPI {
                     }
                 });
     }
+
+    public void patchInCpp(String movie, Context context){
+        webService.addToCPP(DataManager.getTokenHeader(), movie)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (!response.isSuccessful()) {
+                            handleError(response, context);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        handleFailure(t, context);
+                    }
+                });
+    }
+
+
+
+
 
     // Method to handle error response from Retrofit
     private void handleError(Response<?> response, Context context) {
