@@ -129,8 +129,17 @@ public class MovieAPI {
 
     public void patchMovieForUser(String movie, Context context) {
         StringMovie baruchHashem = new StringMovie(movie);
-        patchInMongo(baruchHashem, context);
-        patchInCpp(movie,context);
+
+        Thread firstPatch = new Thread(()->patchInMongo(baruchHashem, context));
+        firstPatch.start();
+        try{
+            firstPatch.join();
+            //patchInCpp(movie,context);
+        }catch (Exception ex)
+        {
+            Log.w("THREAD ERROR", ex);
+            Thread.currentThread().interrupt();
+        }
     }
 
 
