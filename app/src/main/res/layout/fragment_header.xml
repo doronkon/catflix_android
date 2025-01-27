@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Home Link -->
+    <TextView
+        android:id="@+id/home_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textSize="18sp"
+        android:textColor="#0000FF"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_centerVertical="true"/>
+
+    <!-- Profile Link -->
+    <TextView
+        android:id="@+id/profile_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textSize="18sp"
+        android:textColor="#0000FF"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>

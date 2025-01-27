@@ -11,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.catflix_android.Adapters.MovieAdapter;
 import com.example.catflix_android.Entities.Movie;
+import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.CurrentMovieViewModel;
 
@@ -31,6 +33,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_movie_details);
+
+
+        // Add the fragment dynamically to the container (header_container)
+        if (savedInstanceState == null) {
+            HeaderFragment headerFragment = new HeaderFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.header_container, headerFragment); // Replace the container with the fragment
+            transaction.commit();
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

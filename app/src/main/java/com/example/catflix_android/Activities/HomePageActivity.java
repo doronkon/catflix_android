@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.example.catflix_android.Adapters.MovieAdapter;
 import com.example.catflix_android.DataTypes.CategoryHelper;
 import com.example.catflix_android.DataTypes.MoviesResponse;
 import com.example.catflix_android.Entities.Movie;
+import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.MovieViewModel;
 
@@ -35,6 +37,14 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);
+
+        // Add the fragment dynamically to the container (header_container)
+        if (savedInstanceState == null) {
+            HeaderFragment headerFragment = new HeaderFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.header_container, headerFragment); // Replace the container with the fragment
+            transaction.commit();
+        }
 
         // Adjust insets for Edge-to-Edge
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
