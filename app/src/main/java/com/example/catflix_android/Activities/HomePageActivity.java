@@ -1,6 +1,12 @@
 package com.example.catflix_android.Activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -85,6 +91,37 @@ public class HomePageActivity extends AppCompatActivity {
                     List<CategoryHelper> promotedMovies = returnedMovies.getPromotedMovies();
                     categoryAdapter = new CategoryAdapter(HomePageActivity.this, promotedMovies);
                     categoryRecyclerView.setAdapter(categoryAdapter);
+
+                    // Get the first promoted movie and play the video
+                    if (promotedMovies != null && !promotedMovies.isEmpty()) {
+                        CategoryHelper firstCategory = promotedMovies.get(0);
+                        List<Movie> moviesInCategory = firstCategory.getMovies();
+                        if (moviesInCategory != null && !moviesInCategory.isEmpty()) {
+                            Movie firstMovie = moviesInCategory.get(0);
+                            TextView videoBannerText = findViewById(R.id.bannerText);
+                            Button playBannerButton = findViewById(R.id.playButton);
+                            videoBannerText.setText(firstMovie.getName());
+
+                            // Set the OnClickListener
+                            playBannerButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(HomePageActivity.this, MovieDetailsActivity.class);
+                                     intent.putExtra("movie_id", firstMovie.get_id());
+                                    startActivity(intent);
+                                }
+                            });
+
+
+                            // Assuming you have a video URL for the first movie
+                            String videoUrl = "http://10.0.2.2:8080/media/actualMovies/" + firstMovie.getPathToMovie();
+
+                            VideoView videoBanner = findViewById(R.id.videoBanner);
+                            Uri uri = Uri.parse(videoUrl);
+                            videoBanner.setVideoURI(uri);
+                            videoBanner.start();
+                        }
+                    }
                 } else {
                     // Log or handle null response appropriately
                     System.out.println("Movies response is null");
