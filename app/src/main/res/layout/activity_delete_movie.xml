@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".Activities.AdminPageActivity">
+    tools:context=".Activities.DeleteMovieActivity">
 
     <!-- Header Container -->
 <FrameLayout
@@ -15,13 +14,11 @@ android:id="@+id/header_container"
 android:layout_width="match_parent"
 android:layout_height="wrap_content" />
 
-    <!-- Button to Delete Movie -->
-<Button
-android:id="@+id/toDeleteMovieBTN"
-android:layout_width="wrap_content"
+<Spinner
+android:id="@+id/movieDropdown"
+android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:text="Delete movie"
-android:layout_gravity="center_horizontal"
-android:layout_marginTop="16dp" />
+android:spinnerMode="dropdown"
+android:layout_margin="16dp" />
 
     </LinearLayout>

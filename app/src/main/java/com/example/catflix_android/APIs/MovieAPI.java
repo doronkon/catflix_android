@@ -223,5 +223,4 @@ public class MovieAPI {
         Toast.makeText(context, "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-
 }

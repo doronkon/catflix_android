@@ -23,6 +23,7 @@ public class MovieRepository {
     private MutableLiveData<Movie> currentMovie;
     private MutableLiveData<List<Movie>> currentRecommendation;
 
+    private MutableLiveData<List<Movie>> allMovies;
     private MovieDao dao;
     private MovieAPI api;
     private Context context;
@@ -62,5 +63,17 @@ public class MovieRepository {
 
     public void getCppRecommendation(String movieId){
         this.api.getCppRecommendation(movieId, this.context, currentRecommendation);
+    }
+    // Get all movies as LiveData
+    public LiveData<List<Movie>> getAllMovies() {
+        MutableLiveData<List<Movie>> moviesLiveData = new MutableLiveData<>();
+
+        // Fetch the movies on a background thread to avoid blocking the UI thread
+        new Thread(() -> {
+            List<Movie> movies = dao.index(); // Fetch movies from DAO
+            moviesLiveData.postValue(movies);  // Update LiveData on the main thread
+        }).start();
+
+        return moviesLiveData;  // Return LiveData that can be observed by ViewModel
     }
 }

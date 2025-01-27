@@ -1,6 +1,8 @@
 package com.example.catflix_android.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,11 @@ public class AdminPageActivity extends AppCompatActivity {
             transaction.replace(R.id.header_container, headerFragment); // Replace the container with the fragment
             transaction.commit();
         }
+        Button toDeleteMovie = findViewById(R.id.toDeleteMovieBTN);
+        toDeleteMovie.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPageActivity.this, DeleteMovieActivity.class);
+            startActivity(intent);
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

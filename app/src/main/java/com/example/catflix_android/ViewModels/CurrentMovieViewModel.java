@@ -17,6 +17,7 @@ import java.util.List;
 public class CurrentMovieViewModel extends ViewModel {
     MutableLiveData<Movie> currentMovie;
 
+    MutableLiveData<List<Movie>> allMovies;
     MutableLiveData <List<Movie>> currentRecommendation;
     private final MovieRepository repository;
     private LifecycleOwner owner;
@@ -24,6 +25,7 @@ public class CurrentMovieViewModel extends ViewModel {
     public CurrentMovieViewModel(Context context, LifecycleOwner owner){
         this.repository = new MovieRepository(context,owner);
         this.owner = owner;
+        this.allMovies = new MutableLiveData<>();
     }
 
     public LiveData<Movie> getCurrentMovie() {
@@ -39,7 +41,6 @@ public class CurrentMovieViewModel extends ViewModel {
             this.currentMovie.setValue(movie);
         });
        this.repository.fetchCurrentMovie(movieID);
-
     }
 
     public void patchMovieForUser(){
@@ -59,4 +60,22 @@ public class CurrentMovieViewModel extends ViewModel {
             this.currentRecommendation.setValue(recommendList);
         });
     }
+
+    // Get all movies as LiveData
+    public LiveData<List<Movie>> getAllMovies() {
+        // If data is already fetched, return it
+        if (allMovies.getValue() == null) {
+            fetchAllMovies(); // Fetch movies if not already fetched
+        }
+        return allMovies;
+    }
+
+    // Fetch movies and update the LiveData
+    private void fetchAllMovies() {
+        // Observe LiveData from the repository and update this ViewModel's LiveData
+        repository.getAllMovies().observeForever(movies -> {
+            allMovies.setValue(movies);  // Update LiveData in ViewModel when data is fetched
+        });
+    }
+
 }
