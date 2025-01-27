@@ -1,5 +1,7 @@
 package com.example.catflix_android.WebServices;
 
+import androidx.room.Delete;
+
 import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.DataTypes.LoginUser;
 import com.example.catflix_android.DataTypes.MoviesResponse;
@@ -11,6 +13,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -33,4 +36,7 @@ public interface MovieWebService {
 
     @GET("movies/{id}/recommend")
     public Call<List<Movie>> getCppRecommendation(@Header("user") String token, @Path("id") String id);
+
+    @DELETE("movies/{id}")
+    public Call <Void> deleteMovie(@Header("user") String token, @Path("id") String id);
 }

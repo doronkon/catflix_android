@@ -223,4 +223,25 @@ public class MovieAPI {
         Toast.makeText(context, "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
     }
 
+    public void deleteMovie(String movieId, Context context, MutableLiveData<Boolean> flag){
+        webService.deleteMovie(DataManager.getTokenHeader(), movieId)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            flag.setValue(true);
+                        } else {
+                            handleError(response, context);
+                            flag.setValue(false);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        handleFailure(t, context);
+                        flag.setValue(false);
+                    }
+                });
+    }
+
 }

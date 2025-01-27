@@ -78,4 +78,7 @@ public class CurrentMovieViewModel extends ViewModel {
         });
     }
 
+    public void deleteMovie(String movieId){
+        this.repository.deleteMovie(movieId);
+    }
 }

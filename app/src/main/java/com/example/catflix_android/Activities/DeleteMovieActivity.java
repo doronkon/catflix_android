@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,6 +41,13 @@ public class DeleteMovieActivity extends AppCompatActivity {
         // Initialize the Spinner
         movieDropdown = findViewById(R.id.movieDropdown);
 
+        Button deleteMovie = findViewById(R.id.deleteSelectedMovieBTN);
+        deleteMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteSelectedMovie(movieMap.get((String)movieDropdown.getSelectedItem()));
+            }
+        });
         // Initialize the ViewModel
         movieViewModel = new CurrentMovieViewModel(this, this);
 
@@ -105,5 +113,9 @@ public class DeleteMovieActivity extends AppCompatActivity {
                 // Handle case where no selection is made
             }
         });
+    }
+
+    private void deleteSelectedMovie(String movieId){
+        this.movieViewModel.deleteMovie(movieId);
     }
 }

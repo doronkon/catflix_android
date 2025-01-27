@@ -23,6 +23,8 @@ public class MovieRepository {
     private MutableLiveData<Movie> currentMovie;
     private MutableLiveData<List<Movie>> currentRecommendation;
 
+    private MutableLiveData<Boolean> flag = new MutableLiveData<>();
+
     private MutableLiveData<List<Movie>> allMovies;
     private MovieDao dao;
     private MovieAPI api;
@@ -75,5 +77,18 @@ public class MovieRepository {
         }).start();
 
         return moviesLiveData;  // Return LiveData that can be observed by ViewModel
+    }
+
+    public void deleteMovie(String movieId){
+        this.flag.observe(this.owner, returnedFlag->{
+            if(returnedFlag){
+                // delete from movie dao
+                new Thread (() -> {
+                    dao.deleteMovieById(movieId);
+                }).start();
+            }
+        });
+        this.api.deleteMovie(movieId, this.context,flag);
+
     }
 }
