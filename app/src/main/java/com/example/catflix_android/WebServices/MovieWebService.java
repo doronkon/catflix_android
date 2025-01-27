@@ -21,5 +21,7 @@ public interface MovieWebService {
     public Call<MoviesResponse> getMovies(@Header("user") String userToken);
     @GET("movies/index/all")
     public Call<List<Movie>> index();
+    @POST("movies")
+    public Call<Movie> uploadVideo(@Header("user") String userToken, @Body Movie movie);
 
 }
