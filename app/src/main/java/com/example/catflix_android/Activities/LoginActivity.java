@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         model2.getInitComplete().observe(this,val->{
-            Intent intent = new Intent(LoginActivity.this, UploadMovieActivity.class);
+            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
             startActivity(intent);
         });
 
