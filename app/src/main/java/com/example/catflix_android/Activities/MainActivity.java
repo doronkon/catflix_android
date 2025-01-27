@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set an OnClickListener to navigate to LoginActivity
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(intent);
         });
 

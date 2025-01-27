@@ -47,7 +47,7 @@ public class MovieAPI {
         String user = DataManager.getTokenHeader();
         Call<MoviesResponse> call = webService.getMovies(user);
 
-        call.enqueue(new Callback<MoviesResponse>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

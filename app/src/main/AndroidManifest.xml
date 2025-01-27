@@ -26,7 +26,7 @@
         android:theme="@style/Theme.Catflix_android"
         tools:targetApi="34">
         <activity
-            android:name=".Activities.UploadMovieActivty"
+            android:name=".Activities.CategoryActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MovieDetailsActivity"
@@ -52,8 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.UploadMovieActivity"/>
-
+        <activity android:name=".Activities.UploadMovieActivity" />
     </application>
 
 </manifest>

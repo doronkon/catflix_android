@@ -17,4 +17,5 @@
     <string name="watch_again">Watch again!</string>
     <string name="chooseImage">gallery image</string>
     <string name="take_photo">take photo</string>
+    <string name="select_option">select option</string>
 </resources>
