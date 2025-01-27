@@ -18,4 +18,7 @@
     <string name="movie_description">Movie Description</string>
     <string name="movie_name">Movie Name</string>
     <string name="watch_movie">Watch Movie</string>
+    <string name="chooseImage">gallery image</string>
+    <string name="take_photo">take photo</string>
+    <string name="select_option">select option</string>
 </resources>

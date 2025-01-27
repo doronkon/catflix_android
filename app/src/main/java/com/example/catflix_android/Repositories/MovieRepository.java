@@ -21,6 +21,7 @@ import java.util.List;
 
 public class MovieRepository {
     private MutableLiveData<Movie> currentMovie;
+
     private MutableLiveData<List<Movie>> currentRecommendation;
 
     private MutableLiveData<Boolean> flag = new MutableLiveData<>();
@@ -31,6 +32,9 @@ public class MovieRepository {
     private Context context;
 
     private LifecycleOwner owner;
+    private MutableLiveData<Movie> uploadedMovie;
+    private MutableLiveData<Movie> uploadedMovieAPI;
+
 
     public MovieRepository(Context context, LifecycleOwner owner) {
         this.context = context;
@@ -39,6 +43,7 @@ public class MovieRepository {
         dao = database.movieDao();
         this.owner = owner;
         currentMovie = new MutableLiveData<>();
+        uploadedMovieAPI = new MutableLiveData<>();
         currentRecommendation = new MutableLiveData<>();
     }
 
@@ -58,6 +63,32 @@ public class MovieRepository {
     {
         return this.currentMovie;
     }
+
+    public MutableLiveData<Movie> getUploadedMovie() {
+        if(this.uploadedMovie == null){uploadedMovie = new MutableLiveData<>();}
+        return uploadedMovie;
+    }
+    public void uploadMovie(Movie movieCreate) {
+        uploadedMovieAPI.setValue(movieCreate);
+        //we update api and then update room
+        this.uploadedMovieAPI.observe(owner, movie -> {
+            if (movie != null && movie.get_id() != null) {
+                Thread addDaoMovie = new Thread(() -> dao.insert(movie));
+                addDaoMovie.start();
+                try{
+                    addDaoMovie.join();
+                } catch (Exception ex)
+                {
+                    Log.w("THREAD ERROR", ex);
+                    Thread.currentThread().interrupt();}
+                this.uploadedMovie.setValue(movie);
+
+            }
+        });
+        this.api.uploadVideo(movieCreate,uploadedMovieAPI,this.context);
+
+    }
+
 
     public void patchMovieForUser() {
         this.api.patchMovieForUser(this.currentMovie.getValue().get_id(),this.context);

@@ -49,7 +49,7 @@ public class MovieAPI {
         String user = DataManager.getTokenHeader();
         Call<MoviesResponse> call = webService.getMovies(user);
 
-        call.enqueue(new Callback<MoviesResponse>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -121,6 +121,46 @@ public class MovieAPI {
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
                 moviesResponse.setValue(null);
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+    public void uploadVideo(Movie movieCreate,MutableLiveData<Movie> movieResponse,Context context) {
+        String user = DataManager.getTokenHeader();
+        Call<Movie> call = webService.uploadVideo(user,movieCreate);
+
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Movie returnedMovie = response.body();
+                    movieResponse.setValue(returnedMovie);
+
+                } else {
+                    try {
+                        // Get the error message from the response body
+                        String errorMessage = response.errorBody().string();
+                        JSONObject errorObject = new JSONObject(errorMessage);
+                        JSONArray errorsArray = errorObject.getJSONArray("errors");
+                        errorMessage = errorsArray.getString(0);
+
+                        // Show a Toast with the error message
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+                    } catch (IOException | JSONException e) {
+                        // Handle error if errorBody cannot be converted to string
+                        e.printStackTrace();
+                        Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+                    }
+                    movieResponse.setValue(null);
+
+                    System.err.println("API Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+                movieResponse.setValue(null);
+
                 System.err.println("Network Error: " + t.getMessage());
             }
         });
