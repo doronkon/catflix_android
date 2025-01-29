@@ -1,5 +1,6 @@
 package com.example.catflix_android.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private CurrentMovieViewModel currentMovieViewModel;
     private MovieAdapter movieAdapter;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,21 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
             TextView movieDescription = findViewById(R.id.movieDescription);
             movieDescription.setText(movie.getDescription());
+
+            TextView movieCategory = findViewById(R.id.movieCategory);
+            movieCategory.setText(movie.getCategory());
+
+            TextView movieDirector = findViewById(R.id.movieDirector);
+            movieDirector.setText(movie.getDirector());
+
+            TextView movieActors = findViewById(R.id.movieActors);
+            movieActors.setText(movie.getActors());
+
+            TextView movieDuration = findViewById(R.id.movieDuration);
+            movieDuration.setText(movie.getLength());
+
+            TextView minimalAge = findViewById(R.id.minimalAge);
+            minimalAge.setText("Minimal age: " + movie.getMinimalAge());
 
             ImageView imageView = findViewById(R.id.movieThumbnail);
             String imageUrl = "http://10.0.2.2:8080/media/movieThumbnails/" + movie.getThumbnail();

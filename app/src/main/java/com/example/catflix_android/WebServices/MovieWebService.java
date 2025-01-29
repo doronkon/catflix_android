@@ -41,4 +41,7 @@ public interface MovieWebService {
 
     @DELETE("movies/{id}")
     public Call <Void> deleteMovie(@Header("user") String token, @Path("id") String id);
+
+    @PATCH("movies/{id}")
+    public Call <Void> editMovie(@Header("user") String token, @Path("id") String id, @Body Movie movie);
 }

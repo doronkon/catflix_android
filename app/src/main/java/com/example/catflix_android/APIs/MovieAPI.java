@@ -283,5 +283,23 @@ public class MovieAPI {
                     }
                 });
     }
+    public void editMovie(Movie movieUpdate, MutableLiveData<Boolean> flag){
+        webService.editMovie(DataManager.getTokenHeader(), movieUpdate.get_id(),movieUpdate)
+            .enqueue(new Callback<>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        flag.setValue(true);
+                    } else {
+                        flag.setValue(false);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    flag.setValue(false);
+                }
+            });
+    }
 
 }

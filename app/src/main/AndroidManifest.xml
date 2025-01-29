@@ -29,6 +29,9 @@
             android:name=".Activities.EditAndDeleteCategory"
             android:exported="false" />
         <activity
+            android:name=".Activities.UpdateMovieActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.CategoryActivity"
             android:exported="false" />
         <activity

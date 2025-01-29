@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Home"
         android:textSize="18sp"
-        android:textColor="#0000FF"
+        android:textColor="#AF1D1D"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_centerVertical="true"/>
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Profile"
         android:textSize="18sp"
-        android:textColor="#0000FF"
+        android:textColor="#AF1D1D"
         android:layout_toEndOf="@id/home_link"
         android:layout_marginStart="16dp"
         android:layout_centerVertical="true"/>
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Admin"
         android:textSize="18sp"
-        android:textColor="#0000FF"
+        android:textColor="#AF1D1D"
         android:layout_toEndOf="@id/profile_link"
         android:layout_marginStart="16dp"
         android:layout_centerVertical="true"/>

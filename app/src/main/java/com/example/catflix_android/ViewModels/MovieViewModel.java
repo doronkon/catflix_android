@@ -44,5 +44,8 @@ public class MovieViewModel extends ViewModel {
         });
         this.repository.uploadMovie(movieCreate);
     }
+    public void editMovie(Movie movieUpdate) {
+        this.repository.editMovie(movieUpdate);
+    }
 }
 
