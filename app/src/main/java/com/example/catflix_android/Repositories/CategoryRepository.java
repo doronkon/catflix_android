@@ -3,6 +3,8 @@ package com.example.catflix_android.Repositories;
 import android.content.Context;
 import com.example.catflix_android.Entities.Movie;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.util.List;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
@@ -60,6 +62,8 @@ public class CategoryRepository {
             MutableLiveData<Boolean> hazan = new MutableLiveData<>();
             if (returnedFlag) {
                 initMovies(hazan);
+                Toast.makeText(this.context, "Category deleted successfully", Toast.LENGTH_SHORT).show();
+
             }
         });
         this.api.deleteCategory(categoryId, this.context, flag);
