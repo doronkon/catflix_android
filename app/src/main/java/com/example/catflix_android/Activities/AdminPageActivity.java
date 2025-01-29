@@ -29,9 +29,22 @@ public class AdminPageActivity extends AppCompatActivity {
             transaction.replace(R.id.header_container, headerFragment); // Replace the container with the fragment
             transaction.commit();
         }
+
         Button toDeleteMovie = findViewById(R.id.toDeleteMovieBTN);
         toDeleteMovie.setOnClickListener(v -> {
             Intent intent = new Intent(AdminPageActivity.this, DeleteMovieActivity.class);
+            startActivity(intent);
+        });
+
+        Button toEditOrDeleteCategory = findViewById(R.id.toEditOrDeleteCategory);
+        toEditOrDeleteCategory.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPageActivity.this, EditAndDeleteCategory.class);
+            startActivity(intent);
+        });
+
+        Button toUploadMovie = findViewById(R.id.toUploadMovie);
+        toUploadMovie.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPageActivity.this, UploadMovieActivity.class);
             startActivity(intent);
         });
 

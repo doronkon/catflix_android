@@ -26,6 +26,9 @@
         android:theme="@style/Theme.Catflix_android"
         tools:targetApi="34">
         <activity
+            android:name=".Activities.EditAndDeleteCategory"
+            android:exported="false" />
+        <activity
             android:name=".Activities.CategoryActivity"
             android:exported="false" />
         <activity
@@ -51,7 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="true"  />
+            android:exported="true" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">

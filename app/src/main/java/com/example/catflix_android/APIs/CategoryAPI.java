@@ -30,6 +30,7 @@ public class CategoryAPI {
     Retrofit retrofit;
     CategoryWebService webService;
 
+
     public CategoryAPI() {
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -80,5 +81,43 @@ public class CategoryAPI {
                 System.err.println("Network Error: " + t.getMessage());
             }
         });
+    }
+    public void deleteCategory(String categoryId, Context context, MutableLiveData<Boolean> flag) {
+        String user = DataManager.getTokenHeader();
+
+        Call<Void> call = webService.deleteCategory(user, categoryId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    flag.setValue(true);
+                } else {
+                    handleError(response, context);
+                    flag.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+
+
+    private void handleError(Response<?> response, Context context) {
+        try {
+            String errorMessage = response.errorBody().string();
+            JSONObject errorObject = new JSONObject(errorMessage);
+            JSONArray errorsArray = errorObject.getJSONArray("errors");
+            errorMessage = errorsArray.getString(0);
+
+            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
+        }
     }
 }

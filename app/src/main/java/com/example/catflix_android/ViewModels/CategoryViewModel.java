@@ -42,5 +42,9 @@ public class CategoryViewModel extends ViewModel {
         });
         this.repository.fetchCategories();
     }
+
+    public void deleteCategory(String categoryId){
+        this.repository.deleteCategory(categoryId);
+    }
 }
 
