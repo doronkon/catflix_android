@@ -2,6 +2,7 @@ package com.example.catflix_android.Repositories;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -21,6 +22,8 @@ import java.util.List;
 
 public class MovieRepository {
     private MutableLiveData<Movie> currentMovie;
+    private MutableLiveData<Boolean> finishedUpdate = new MutableLiveData<>();
+
 
     private MutableLiveData<List<Movie>> currentRecommendation;
 
@@ -121,5 +124,26 @@ public class MovieRepository {
         });
         this.api.deleteMovie(movieId, this.context,flag);
 
+    }
+    public void editMovie(Movie movieUpdate) {
+        this.finishedUpdate.observe(this.owner,val->{
+            if(val)
+            {
+                Thread editDao = new Thread (() -> dao.update(movieUpdate));
+                editDao.start();
+                try{
+                    editDao.join();
+                    Toast.makeText(this.context, "Edited successfully", Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception ex)
+                {
+                    Log.w("THREAD ERROR", ex);
+                    Thread.currentThread().interrupt();
+                }
+            }else {
+                Toast.makeText(this.context, "Edit failed. Please check your network connection.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        this.api.editMovie(movieUpdate,this.finishedUpdate);
     }
 }

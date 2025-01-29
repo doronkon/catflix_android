@@ -101,7 +101,7 @@ public class UpdateMovieActivity extends AppCompatActivity {
             //hard coded category switch to dropDown list
             Movie movie = new Movie(movieId, video, minimal, isCatflixOriginal, desc, image, null, actors, director, selectedCategoryId, null, name);
 
-            //model.editMovie(movie);
+            model.editMovie(movie);
         });
 
         model.getUploadedMovie().observe(this, movie -> {
