@@ -1,0 +1,120 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/textViewEditingMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You are editing: "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextDirector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Director"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextActors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Actors"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/editTextMinimalAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Minimal Age"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Catflix Original:" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupCatflixOriginal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioTrue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="True" />
+
+                <RadioButton
+                    android:id="@+id/radioFalse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="False" />
+
+            </RadioGroup>
+            <!-- category from here -->
+
+            <Spinner
+                android:id="@+id/dropdownCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:spinnerMode="dropdown" />
+            <!-- category to here -->
+
+
+            <Button
+                android:id="@+id/buttonUploadThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Upload Thumbnail" />
+
+            <Button
+                android:id="@+id/buttonUploadVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Upload Video" />
+
+            <Button
+                android:id="@+id/buttonUploadMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Upload Movie" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
