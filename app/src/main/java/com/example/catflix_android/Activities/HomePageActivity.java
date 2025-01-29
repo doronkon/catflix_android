@@ -52,13 +52,6 @@ public class HomePageActivity extends AppCompatActivity {
             transaction.commit();
         }
 
-        // Adjust insets for Edge-to-Edge
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
         // Initialize alreadyWatched RecyclerView
         returnedMoviesRecyclerView = findViewById(R.id.movieList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

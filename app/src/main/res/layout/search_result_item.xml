@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@color/black">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Movie Thumbnail -->
+    <ImageView
+        android:id="@+id/movieThumbnail"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Movie Thumbnail" />
+
+    <!-- Movie Title -->
+
+    <!-- Play Button -->
+
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:paddingStart="12dp"
+        android:text="Movie Title"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/playButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_media_play"
+        android:contentDescription="Play Movie"
+        app:tint="#F40000" />
+
+</LinearLayout>

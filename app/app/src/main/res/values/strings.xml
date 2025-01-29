@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">catflix_android</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="name">name</string>
+    <string name="email">Email</string>
+    <string name="displayname">displayName</string>
+    <string name="displayName">displayName</string>
+    <string name="sign_up">sign up</string>
+    <string name="watch_again">Watch again!</string>
+    <string name="chooseImage">choose image</string>
+</resources>

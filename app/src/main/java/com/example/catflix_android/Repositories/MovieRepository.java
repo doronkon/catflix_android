@@ -122,4 +122,9 @@ public class MovieRepository {
         this.api.deleteMovie(movieId, this.context,flag);
 
     }
+
+    public String searchMovies(String query, String results) {
+        return "a?";
+    }
+
 }
