@@ -104,14 +104,6 @@ public class UpdateMovieActivity extends AppCompatActivity {
             model.editMovie(movie);
         });
 
-        model.getUploadedMovie().observe(this, movie -> {
-            if (movie != null) {
-                Toast.makeText(this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Upload failed. Please check your network connection.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         //category drop down list start
         categoryViewModel = new CategoryViewModel(this,this);
         Spinner dropdownList = findViewById(R.id.dropdownCategory);

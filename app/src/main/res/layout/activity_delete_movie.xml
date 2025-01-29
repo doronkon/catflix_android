@@ -6,40 +6,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#121212"
     tools:context=".Activities.DeleteMovieActivity">
 
-    <!-- Header Container -->
-<FrameLayout
-android:id="@+id/header_container"
-android:layout_width="match_parent"
-android:layout_height="wrap_content" />
-
-<Spinner
-android:id="@+id/movieDropdown"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:spinnerMode="dropdown"
-android:layout_margin="16dp" />
-
-    <LinearLayout
+    <!-- Header Bar -->
+    <FrameLayout
+        android:id="@+id/header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:background="#000000"
+        android:padding="16dp">
 
-        <Button
-            android:id="@+id/deleteSelectedMovieBTN"
+        <TextView
+            android:id="@+id/headerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete selected movie"
-            android:layout_marginEnd="8dp"/>
+            android:text="Delete Movie"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+    </FrameLayout>
+
+    <!-- Movie Dropdown -->
+    <Spinner
+        android:id="@+id/movieDropdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:background="@android:drawable/btn_dropdown"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:popupBackground="#333333"
+        android:textColorHint="#FFFFFF"/>
+
+    <!-- Delete Button -->
+    <Button
+        android:id="@+id/deleteSelectedMovieBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Selected Movie"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFFFFF"
+        
+        android:backgroundTint="#D32F2F" />
 
         <Button
             android:id="@+id/editSelectedMovieBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit selected movie" />
-    </LinearLayout>
-
 
 </LinearLayout>

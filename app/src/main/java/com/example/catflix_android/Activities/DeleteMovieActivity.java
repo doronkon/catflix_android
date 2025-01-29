@@ -127,6 +127,7 @@ public class DeleteMovieActivity extends AppCompatActivity {
     }
 
     private void deleteSelectedMovie(String movieId){
+
         this.movieViewModel.deleteMovie(movieId);
     }
 }
