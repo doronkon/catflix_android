@@ -174,7 +174,7 @@ public class MovieAPI {
         firstPatch.start();
         try{
             firstPatch.join();
-            //patchInCpp(movie,context);
+            patchInCpp(movie,context);
         }catch (Exception ex)
         {
             Log.w("THREAD ERROR", ex);
