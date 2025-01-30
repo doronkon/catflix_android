@@ -3,7 +3,10 @@ package com.example.catflix_android.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,13 +34,21 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Find views
+        TextView appTitle = findViewById(R.id.appTitle);
         Button button = findViewById(R.id.startButton);
 
-        // Set an OnClickListener to navigate to LoginActivity
+        // Load animation
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash_animation);
+
+        // Start animation
+        appTitle.startAnimation(animation);
+
+        // Set OnClickListener to navigate to LoginActivity
         button.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         });
-
     }
 }
