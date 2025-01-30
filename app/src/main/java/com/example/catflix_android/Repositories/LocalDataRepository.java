@@ -102,7 +102,6 @@ public class LocalDataRepository {
             }
         });
 
-
     }
 
     public MutableLiveData<List<User>> getUsers() {
@@ -112,4 +111,5 @@ public class LocalDataRepository {
     public MutableLiveData<List<Movie>> getMovies() {
         return movies;
     }
+
 }

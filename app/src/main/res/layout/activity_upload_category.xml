@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.UploadCategoryActivity">
+
+    <!-- Header Container -->
+    <FrameLayout
+        android:id="@+id/header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- EditText -->
+    <EditText
+        android:id="@+id/newCategoryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Enter new category name"
+        android:inputType="text"
+        android:padding="16dp"
+        android:textColorHint="@color/gray" />
+
+    <!-- Dropdown (Spinner) -->
+    <Spinner
+        android:id="@+id/booleanSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp" />
+
+    <!-- Edit Button -->
+    <Button
+        android:id="@+id/editSelectedCategoryBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_margin="16dp" />
+
+</LinearLayout>

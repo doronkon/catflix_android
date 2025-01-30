@@ -1,5 +1,6 @@
 package com.example.catflix_android.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,6 +43,16 @@ public class DeleteMovieActivity extends AppCompatActivity {
         movieDropdown = findViewById(R.id.movieDropdown);
 
         Button deleteMovie = findViewById(R.id.deleteSelectedMovieBTN);
+        Button editMovie = findViewById(R.id.editSelectedMovieBtn);
+        editMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DeleteMovieActivity.this, UpdateMovieActivity.class);
+                intent.putExtra("movie_id", movieMap.get((String)movieDropdown.getSelectedItem()));
+                intent.putExtra("movie_name", (String)movieDropdown.getSelectedItem());
+                startActivity(intent);
+            }
+        });
         deleteMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +127,7 @@ public class DeleteMovieActivity extends AppCompatActivity {
     }
 
     private void deleteSelectedMovie(String movieId){
+
         this.movieViewModel.deleteMovie(movieId);
     }
 }
