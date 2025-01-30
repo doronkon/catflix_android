@@ -48,6 +48,12 @@ public class AdminPageActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button toUploadCategory = findViewById(R.id.toUploadCategory);
+        toUploadCategory.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminPageActivity.this, UploadCategoryActivity.class);
+            startActivity(intent);
+        });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

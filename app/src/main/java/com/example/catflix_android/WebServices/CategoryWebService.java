@@ -6,9 +6,12 @@ import com.example.catflix_android.Entities.Category;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface CategoryWebService {
@@ -17,4 +20,10 @@ public interface CategoryWebService {
 
     @DELETE("categories/{id}")
     public Call<Void> deleteCategory(@Header("user") String userToken, @Path("id") String id);
+
+    @PATCH("categories/{id}")
+    public Call<Void> editCategory(@Header("user") String userToken, @Path("id") String id, @Body Category cat);
+
+    @POST("categories")
+    public Call<Void> createCategory(@Header("user") String userToken, @Body Category cat);
 }

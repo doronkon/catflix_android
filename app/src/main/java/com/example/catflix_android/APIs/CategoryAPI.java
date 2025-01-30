@@ -120,4 +120,56 @@ public class CategoryAPI {
             Toast.makeText(context, "Unknown error occurred", Toast.LENGTH_LONG).show();
         }
     }
+
+    public void editCategory(String categoryId, String newCatName, boolean flag, Context context){
+        String user = DataManager.getTokenHeader();
+        Category pojo = new Category(categoryId,newCatName,flag);
+        Call<Void> call = webService.editCategory(user, categoryId, pojo);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Category edited successfully!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    handleError(response, context);
+                    Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public void createCategory(String newCatName, boolean flag, Context context){
+        String user = DataManager.getTokenHeader();
+        Category pojo = new Category(null,newCatName,flag);
+        Call<Void> call = webService.createCategory(user, pojo);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Category edited successfully!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    handleError(response, context);
+                    Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
 }

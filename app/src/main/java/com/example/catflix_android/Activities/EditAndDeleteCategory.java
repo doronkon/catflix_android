@@ -1,5 +1,6 @@
 package com.example.catflix_android.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +31,8 @@ public class EditAndDeleteCategory extends AppCompatActivity {
     private CategoryViewModel categoryViewModel;
     private HashMap<String, String> categoryMap = new HashMap<>(); // Map category name to ID
     private String selectedCategoryId;
+
+    private String selectedCategoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +86,9 @@ public class EditAndDeleteCategory extends AppCompatActivity {
         dropdownList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedCategoryName = parent.getItemAtPosition(position).toString();
+                selectedCategoryName = parent.getItemAtPosition(position).toString();
                 selectedCategoryId = categoryMap.get(selectedCategoryName); // Get the corresponding ID
-                Toast.makeText(EditAndDeleteCategory.this, "Selected ID: " + selectedCategoryId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditAndDeleteCategory.this, "Selected Category: " + selectedCategoryName, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -101,6 +104,18 @@ public class EditAndDeleteCategory extends AppCompatActivity {
             public void onClick(View v) {
                 // Replace with the actual category ID you want to delete
                 deleteCategory(selectedCategoryId);
+            }
+        });
+
+        Button editCategoryBTN = findViewById(R.id.editSelectedCategoryBTN);
+
+        editCategoryBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditAndDeleteCategory.this, EditCategoryPageActivity.class);
+                intent.putExtra("selectedCategoryId", selectedCategoryId);
+                intent.putExtra("selectedCategoryName", selectedCategoryName);
+                startActivity(intent);
             }
         });
     }

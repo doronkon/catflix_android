@@ -46,5 +46,12 @@ public class CategoryViewModel extends ViewModel {
     public void deleteCategory(String categoryId){
         this.repository.deleteCategory(categoryId);
     }
+
+    public void editCategory(String categoryId, String newCatName, boolean flag){
+        this.repository.editCategory( categoryId, newCatName, flag);
+    }
+    public void createCategory(String newCatName, boolean flag){
+        this.repository.createCategory(newCatName, flag);
+    }
 }
 

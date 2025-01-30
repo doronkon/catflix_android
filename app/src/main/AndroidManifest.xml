@@ -26,6 +26,12 @@
         android:theme="@style/Theme.Catflix_android"
         tools:targetApi="34">
         <activity
+            android:name=".Activities.UploadCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.EditCategoryPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.EditAndDeleteCategory"
             android:exported="false" />
         <activity

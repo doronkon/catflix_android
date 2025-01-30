@@ -21,8 +21,6 @@ public class CategoryRepository {
     private final LifecycleOwner owner;
     private final Context context;
     private final CategoryAPI api;
-    private MutableLiveData<Boolean> flag = new MutableLiveData<>();
-    private MutableLiveData<Boolean> completedDao = new MutableLiveData<>();
 
     MutableLiveData<List<Movie>> movies = new MutableLiveData<>();
 
@@ -48,7 +46,9 @@ public class CategoryRepository {
     }
 
     public void deleteCategory(String categoryId) {
-        this.flag.observe(this.owner, returnedFlag -> {
+        MutableLiveData<Boolean> flag = new MutableLiveData<>();
+        MutableLiveData<Boolean> completedDao = new MutableLiveData<>();
+        flag.observe(this.owner, returnedFlag -> {
             if (returnedFlag) {
                 new Thread(() -> {
                     daoMovie.deleteAll();
@@ -57,7 +57,7 @@ public class CategoryRepository {
             }
         });
 
-        this.completedDao.observe(this.owner, returnedFlag -> {
+        completedDao.observe(this.owner, returnedFlag -> {
             completedDao.postValue(false);
             MutableLiveData<Boolean> hazan = new MutableLiveData<>();
             if (returnedFlag) {
@@ -95,4 +95,10 @@ public class CategoryRepository {
         });
     }
 
+    public void editCategory(String categoryId, String newCatName, boolean flag){
+        this.api.editCategory(categoryId, newCatName, flag, this.context);
+    }
+    public void createCategory(String newCatName, boolean flag){
+        this.api.createCategory(newCatName, flag, this.context);
+    }
 }
