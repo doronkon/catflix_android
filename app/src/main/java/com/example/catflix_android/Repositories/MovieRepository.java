@@ -15,12 +15,15 @@ import com.example.catflix_android.Daos.MovieDao;
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.DataTypes.MoviesResponse;
+import com.example.catflix_android.DataTypes.StringMovie;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 
 import java.util.List;
 
 public class MovieRepository {
+    MutableLiveData<Boolean> finishedMongoPatch;
+
     private MutableLiveData<Movie> currentMovie;
     private MutableLiveData<Boolean> finishedUpdate;
 
@@ -95,7 +98,15 @@ public class MovieRepository {
 
 
     public void patchMovieForUser() {
-        this.api.patchMovieForUser(this.currentMovie.getValue().get_id(),this.context);
+        StringMovie baruchHashem = new StringMovie(this.currentMovie.getValue().get_id());
+        this.finishedMongoPatch = new MutableLiveData<>();
+        this.finishedMongoPatch.observe(this.owner, val ->{
+            if(val)
+            {
+                this.api.patchInCpp(this.currentMovie.getValue().get_id(),this.context);
+            }
+        });
+        this.api.patchInMongo(this.finishedMongoPatch,baruchHashem,this.context);
     }
 
     public void getCppRecommendation(String movieId){

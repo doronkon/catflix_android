@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -167,34 +168,25 @@ public class MovieAPI {
     }
 
 
-    public void patchMovieForUser(String movie, Context context) {
-        StringMovie baruchHashem = new StringMovie(movie);
-
-        Thread firstPatch = new Thread(()->patchInMongo(baruchHashem, context));
-        firstPatch.start();
-        try{
-            firstPatch.join();
-            patchInCpp(movie,context);
-        }catch (Exception ex)
-        {
-            Log.w("THREAD ERROR", ex);
-            Thread.currentThread().interrupt();
-        }
-    }
 
 
-    public void patchInMongo(StringMovie baruchHashem, Context context){
+    public void patchInMongo(MutableLiveData<Boolean> flag,StringMovie baruchHashem, Context context){
         webService.addToNode(DataManager.getCurrentUserId(), DataManager.getTokenHeader(), baruchHashem)
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (!response.isSuccessful()) {
+                        if (response.isSuccessful()) {
+                            flag.setValue(true);
+                        }else{
+                            flag.setValue(false);
                             handleError(response, context);
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
+                        flag.setValue(false);
                         handleFailure(t, context);
                     }
                 });
@@ -226,8 +218,7 @@ public class MovieAPI {
                             List<Movie> returnedMovies = response.body();
                             currentRecommendation.setValue(returnedMovies);
                         } else {
-                            handleError(response, context);
-                            currentRecommendation.setValue(null);
+                            currentRecommendation.setValue(new ArrayList<>());
                         }
                     }
 
