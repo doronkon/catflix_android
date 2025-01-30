@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,53 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".Activities.MovieDetailsActivity"
-    tools:ignore="ExtraText">
+    tools:context=".Activities.MovieDetailsActivity">
 
+    <!-- Header (always visible) -->
     <FrameLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <!-- Replace with your drawable -->
-        app:layout_constraintTop_toBottomOf="@id/movieTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Movie Description Container -->
-    <TextView
-        android:id="@+id/movieName"
-        android:layout_width="246dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/movieThumbnail"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:src="@drawable/sample_poster"
-        app:layout_constraintTop_toBottomOf="@id/movieName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/descriptionContainer"
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardBackgroundColor="#1E1E1E"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintTop_toBottomOf="@id/movieThumbnail"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -63,117 +32,120 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Movie Description -->
-
-            <!-- Category -->
+            <!-- Movie Title -->
             <TextView
-                android:id="@+id/movieDescription"
+                android:id="@+id/movieName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="16dp"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center" />
 
-            <TextView
-                android:id="@+id/movieCategory"
+            <!-- Movie Thumbnail -->
+            <ImageView
+                android:id="@+id/movieThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/sample_poster"
+                android:layout_marginTop="16dp" />
+
+            <!-- Movie Description -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/descriptionContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#CCCCCC"
-                android:textSize="14sp" />
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="8dp">
 
-            <!-- Director -->
-            <TextView
-                android:id="@+id/movieDirector"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Description -->
+                    <TextView
+                        android:id="@+id/movieDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/movieDirector"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#CCCCCC"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/movieActors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#CCCCCC"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/movieDuration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#CCCCCC"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/minimalAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="#CCCCCC"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:id="@+id/buttonContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#CCCCCC"
-                android:textSize="14sp" />
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <!-- Actors -->
-            <TextView
-                android:id="@+id/movieActors"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#CCCCCC"
-                android:textSize="14sp" />
+                <Button
+                    android:id="@+id/watchMovieButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="PLAY"
+                    android:backgroundTint="#FF0000"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
-            <!-- Duration -->
+            <!-- People Also Liked -->
             <TextView
-                android:id="@+id/movieDuration"
-                android:layout_width="match_parent"
+                android:id="@+id/peopleAlsoLiked"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#CCCCCC"
-                android:textSize="14sp" />
+                android:layout_marginTop="24dp"
+                android:text="People also liked -"
+                android:textSize="16sp"
+                android:textColor="#666666" />
 
-            <!-- Minimal Age -->
-            <TextView
-                android:id="@+id/minimalAge"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movieList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#CCCCCC"
-                android:textSize="14sp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Buttons -->
-    <LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/descriptionContainer">
-
-        <Button
-            android:id="@+id/watchMovieButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:text="PLAY"
-            android:backgroundTint="#FF0000"
-            android:textColor="#FFFFFF" />
-
-        <!-- Delete Button -->
-
-        <!-- Edit Button -->
-    </LinearLayout>
-
-    <!-- RecyclerView -->
-
-    <!-- People Also Liked Text -->
-    <TextView
-        android:id="@+id/peopleAlsoLiked"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
-        android:text="People also liked -"
-        android:textSize="16sp"
-        android:textColor="#666666"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movieList"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/peopleAlsoLiked"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="UnknownId" />
-
-
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
