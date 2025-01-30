@@ -2,6 +2,7 @@ package com.example.catflix_android.WebServices;
 
 import com.example.catflix_android.DataTypes.MoviesResponse;
 import com.example.catflix_android.Entities.Category;
+import com.example.catflix_android.Entities.Movie;
 
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface CategoryWebService {
 
     @POST("categories")
     public Call<Void> createCategory(@Header("user") String userToken, @Body Category cat);
+
+    //http://localhost:8080/api/categories/movies/${id}
+    @GET("categories/movies/{id}")
+    public Call<List<Movie>> fetchCategoryMovies(@Header("user") String userToken, @Path("id") String id);
 }

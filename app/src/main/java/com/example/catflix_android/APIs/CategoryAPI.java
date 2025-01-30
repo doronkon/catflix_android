@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.MoviesResponse;
 import com.example.catflix_android.Entities.Category;
+import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.WebServices.CategoryWebService;
 import com.example.catflix_android.WebServices.MovieWebService;
 import com.google.gson.Gson;
@@ -168,6 +169,30 @@ public class CategoryAPI {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(context, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+    public void fetchCategoryMovies(MutableLiveData<List<Movie>> categoryMovies,String CategoryID){
+
+        String user = DataManager.getTokenHeader();
+        Call<List<Movie>> call = webService.fetchCategoryMovies(user, CategoryID);
+
+        call.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                if (response.isSuccessful()) {
+                    List<Movie> returnedCategoryMovies = response.body();
+                    categoryMovies.setValue(returnedCategoryMovies);
+
+                } else {
+                    categoryMovies.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+                categoryMovies.setValue(null);
                 System.err.println("Network Error: " + t.getMessage());
             }
         });

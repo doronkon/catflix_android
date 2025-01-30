@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.util.List;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.catflix_android.APIs.CategoryAPI;
@@ -18,6 +19,8 @@ import com.example.catflix_android.APIs.MovieAPI;
 
 
 public class CategoryRepository {
+    private MutableLiveData<List<Movie>> categoryMovies;
+
     private final LifecycleOwner owner;
     private final Context context;
     private final CategoryAPI api;
@@ -43,6 +46,14 @@ public class CategoryRepository {
     }
     public MutableLiveData<List<Category>> getCategories() {
         return categories;
+    }
+    public LiveData<List<Movie>> getCategoryMovies()
+    {
+        if(categoryMovies == null)
+        {
+            categoryMovies = new MutableLiveData<>();
+        }
+        return this.categoryMovies;
     }
 
     public void deleteCategory(String categoryId) {
@@ -101,4 +112,8 @@ public class CategoryRepository {
     public void createCategory(String newCatName, boolean flag){
         this.api.createCategory(newCatName, flag, this.context);
     }
+    public void fetchCategoryMovies(String CategoryID){
+        this.api.fetchCategoryMovies(this.categoryMovies,CategoryID);
+    }
+
 }
