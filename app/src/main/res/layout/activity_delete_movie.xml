@@ -10,6 +10,7 @@
     android:background="#121212"
     tools:context=".Activities.DeleteMovieActivity">
 
+
     <!-- Header Bar -->
     <FrameLayout
         android:id="@+id/header_container"

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.catflix_android.Entities.Category;
+import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Repositories.CategoryRepository;
 import com.example.catflix_android.Repositories.MovieRepository;
 
@@ -23,6 +24,8 @@ public class CategoryViewModel extends ViewModel {
     private final LifecycleOwner owner;
     private final CategoryRepository repository;
     private MutableLiveData<List<Category>> categories;
+    private MutableLiveData<List<Movie>> categoryMovies;
+
 
     public CategoryViewModel(Context context, LifecycleOwner owner) {
         this.context = context;
@@ -34,6 +37,15 @@ public class CategoryViewModel extends ViewModel {
     public LiveData<List<Category>> getCategories() {
         return categories;
     }
+    public LiveData<List<Movie>> getCategoryMovies()
+    {
+        if(categoryMovies == null)
+        {
+            categoryMovies = new MutableLiveData<>();
+        }
+        return this.categoryMovies;
+    }
+
 
     public void fetchCategories() {
         // Simulated fetch
@@ -52,6 +64,13 @@ public class CategoryViewModel extends ViewModel {
     }
     public void createCategory(String newCatName, boolean flag){
         this.repository.createCategory(newCatName, flag);
+    }
+    public void fetchCategoryMovies(String CategoryID)
+    {
+        this.repository.getCategoryMovies().observe(this.owner, returnedMovies->{
+            this.categoryMovies.setValue(returnedMovies);
+        });
+        this.repository.fetchCategoryMovies(CategoryID);
     }
 }
 

@@ -15,11 +15,13 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.catflix_android.Entities.Category;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
+import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.Utils;
 import com.example.catflix_android.ViewModels.CategoryViewModel;
@@ -46,6 +48,13 @@ public class UploadMovieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_movie_activty);
+        // Add the fragment dynamically to the container (header_container)
+        if (savedInstanceState == null) {
+            HeaderFragment headerFragment = new HeaderFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.header_container, headerFragment); // Replace the container with the fragment
+            transaction.commit();
+        }
 
         final EditText nameEditText = findViewById(R.id.editTextName);
         final EditText directorEditText = findViewById(R.id.editTextDirector);

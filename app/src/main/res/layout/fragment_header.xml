@@ -51,4 +51,14 @@
         android:layout_marginStart="16dp"
         android:layout_centerVertical="true"/>
 
+    <!-- Spinner (Now Below Admin) -->
+    <Spinner
+        android:id="@+id/dropdownList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:prompt="@string/select_option"
+        android:layout_below="@id/admin"
+        android:layout_marginTop="16dp"/>
+
 </RelativeLayout>
