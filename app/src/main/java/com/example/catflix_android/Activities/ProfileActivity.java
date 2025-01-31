@@ -1,7 +1,9 @@
 package com.example.catflix_android.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.CurrentUserViewModel;
@@ -43,6 +46,11 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
         TextView textBoxDisplayName = findViewById(R.id.textDisplayName);
+        Button editProfileBtn = findViewById(R.id.editProfileButton);
+        editProfileBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        });
         currentUserViewModel = new CurrentUserViewModel(this,this);
 
 
@@ -60,6 +68,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Glide.with(ProfileActivity.this)
                         .load(imageUrl)
+                        .skipMemoryCache(true)  // Skip memory cache
+                        .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip disk cache
                         .into(imageView);
             } else {
                 //onFailure/404,403....

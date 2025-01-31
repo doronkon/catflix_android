@@ -46,4 +46,11 @@ public class DataManager {
     public static void setIsAdmin(Boolean isAdmin) {
         DataManager.isAdmin = isAdmin;
     }
+    public static void reset() {
+        token = null;
+        currentUserID  = null;
+        isAdmin = null;
+        intialized = false;
+    }
+
 }

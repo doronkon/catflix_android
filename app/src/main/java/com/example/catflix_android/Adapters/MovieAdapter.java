@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.catflix_android.Activities.MovieDetailsActivity;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.R;
@@ -41,6 +42,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             // Use Glide to load the image
             Glide.with(thumbnail.getContext())
                     .load(imageUrl)
+                    .skipMemoryCache(true)  // Skip memory cache
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip disk cache
                     .into(thumbnail);
 
             // Set click listener

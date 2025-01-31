@@ -5,4 +5,12 @@
         <item name="android:fontFamily">sans-serif</item> <!-- Modern font -->
         <item name="android:padding">10dp</item>
     </style>
+</resources><?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RoundImage">round
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

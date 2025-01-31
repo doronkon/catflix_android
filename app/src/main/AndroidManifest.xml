@@ -26,6 +26,9 @@
         android:theme="@style/Theme.Catflix_android"
         tools:targetApi="34">
         <activity
+            android:name=".Activities.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.CategoryMoviesActivity"
             android:exported="false" />
         <activity

@@ -26,6 +26,7 @@ public class UserRepository {
     private final Context context;
 
     private LifecycleOwner owner;
+    private MutableLiveData<User> returnedUser;
 
     public UserRepository(Context context, LifecycleOwner owner) {
         this.context = context;
@@ -62,5 +63,26 @@ public class UserRepository {
         }
         //finished because of the join
         return this.currentUser;
+    }
+    public void editUser(User userEdit, MutableLiveData<Boolean> editComplete)
+    {
+        this.returnedUser = new MutableLiveData<User>();
+        this.returnedUser.observe(this.owner,user->{
+            if(user!=null)
+            {
+                Thread editRoom = new Thread(()->this.dao.update(user));
+                editRoom.start();
+                try{
+                    editRoom.join();
+                    editComplete.setValue(true);
+                }
+                catch (Exception ex)
+                {
+                    Log.w("THREAD ERROR", ex);
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        this.api.editUser(userEdit,this.returnedUser);
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.DataTypes.LoginResponse;
 import com.example.catflix_android.DataTypes.LoginUser;
+import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 import com.example.catflix_android.WebServices.UserWebService;
 import com.google.gson.Gson;
@@ -226,6 +227,30 @@ public class UserAPI {
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 usersResponse.setValue(null);
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public void editUser(User userEdit, MutableLiveData<User> userResponse){
+
+        String user = DataManager.getTokenHeader();
+        Call<User> call = webService.editUser(user, userEdit,userEdit.get_id());
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User returnedUser = response.body();
+                    userResponse.setValue(returnedUser);
+
+                } else {
+                    userResponse.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                userResponse.setValue(null);
                 System.err.println("Network Error: " + t.getMessage());
             }
         });
