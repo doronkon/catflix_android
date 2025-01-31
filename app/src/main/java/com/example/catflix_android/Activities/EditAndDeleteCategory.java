@@ -63,10 +63,10 @@ public class EditAndDeleteCategory extends AppCompatActivity {
         // Adapter for the Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item, // Layout for each item
+                R.layout.custom_spinner_layout,  // Use your custom layout for the dropdown items
                 items
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_layout);
         dropdownList.setAdapter(adapter);
         categoryViewModel.getCategories().observe(this,categories-> {
             if (categories != null)

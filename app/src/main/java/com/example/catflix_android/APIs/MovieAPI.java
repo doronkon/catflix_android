@@ -293,4 +293,29 @@ public class MovieAPI {
             });
     }
 
+    public void fetchSearchMovies(MutableLiveData<List<Movie>> searchMovies,String query){
+
+        String user = DataManager.getTokenHeader();
+        Call<List<Movie>> call = webService.fetchSearchMovies(user, query);
+
+        call.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                if (response.isSuccessful()) {
+                    List<Movie> returnedCategoryMovies = response.body();
+                    searchMovies.setValue(returnedCategoryMovies);
+
+                } else {
+                    searchMovies.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+                searchMovies.setValue(null);
+                System.err.println("Network Error: " + t.getMessage());
+            }
+        });
+    }
+
 }

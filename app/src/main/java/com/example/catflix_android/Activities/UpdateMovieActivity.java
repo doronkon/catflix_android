@@ -114,7 +114,7 @@ public class UpdateMovieActivity extends AppCompatActivity {
 
         //category drop down list start
         categoryViewModel = new CategoryViewModel(this,this);
-        Spinner dropdownList = findViewById(R.id.dropdownCategory);
+        Spinner dropdownList = findViewById(R.id.dropdownList);
 
         // Initially empty list
         List<String> items = new ArrayList<>();
@@ -122,10 +122,10 @@ public class UpdateMovieActivity extends AppCompatActivity {
         // Adapter for the Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item, // Layout for each item
+                R.layout.custom_spinner_layout,  // Use your custom layout for the dropdown items
                 items
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_layout);
         dropdownList.setAdapter(adapter);
         categoryViewModel.getCategories().observe(this,categories-> {
             if (categories != null)

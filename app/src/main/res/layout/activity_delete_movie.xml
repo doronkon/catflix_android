@@ -29,17 +29,19 @@
             android:textColor="#FFFFFF"/>
     </FrameLayout>
 
-    <!-- Movie Dropdown -->
     <Spinner
         android:id="@+id/movieDropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
-        android:background="@android:drawable/btn_dropdown"
         android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:popupBackground="#333333"
-        android:textColorHint="#FFFFFF"/>
+        android:padding="12dp"
+        android:popupBackground="#1E1E1E"
+        android:background="@drawable/spinner_background"
+        android:dropDownVerticalOffset="70dp"
+        android:dropDownHorizontalOffset="5dp"
+        android:textColorHint="#FFFFFF"
+        android:fontFamily="sans-serif" />
 
     <!-- Delete Button -->
     <Button
@@ -55,10 +57,16 @@
         
         android:backgroundTint="#D32F2F" />
 
-        <Button
-            android:id="@+id/editSelectedMovieBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit selected movie" />
+    <Button
+        android:id="@+id/editSelectedMovieBtn"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#D32F2F"
+        android:padding="12dp"
+        android:text="Edit selected movie"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 
 </LinearLayout>

@@ -44,33 +44,23 @@ public class DeleteMovieActivity extends AppCompatActivity {
 
         Button deleteMovie = findViewById(R.id.deleteSelectedMovieBTN);
         Button editMovie = findViewById(R.id.editSelectedMovieBtn);
-        editMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DeleteMovieActivity.this, UpdateMovieActivity.class);
-                intent.putExtra("movie_id", movieMap.get((String)movieDropdown.getSelectedItem()));
-                intent.putExtra("movie_name", (String)movieDropdown.getSelectedItem());
-                startActivity(intent);
-            }
+
+        // Set click listener for editing a movie
+        editMovie.setOnClickListener(v -> {
+            Intent intent = new Intent(DeleteMovieActivity.this, UpdateMovieActivity.class);
+            intent.putExtra("movie_id", movieMap.get((String) movieDropdown.getSelectedItem()));
+            intent.putExtra("movie_name", (String) movieDropdown.getSelectedItem());
+            startActivity(intent);
         });
-        deleteMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteSelectedMovie(movieMap.get((String)movieDropdown.getSelectedItem()));
-            }
-        });
+
+        // Set click listener for deleting a movie
+        deleteMovie.setOnClickListener(v -> deleteSelectedMovie(movieMap.get((String) movieDropdown.getSelectedItem())));
+
         // Initialize the ViewModel
         movieViewModel = new CurrentMovieViewModel(this, this);
 
         // Observe the movie list and populate the dropdown
-        movieViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                if (movies != null) {
-                    populateDropdown(movies, movieMap); // Update the dropdown when data changes
-                }
-            }
-        });
+        movieViewModel.getAllMovies().observe(this, this::populateDropdown);
 
         // Add the header fragment dynamically
         if (savedInstanceState == null) {
@@ -88,10 +78,10 @@ public class DeleteMovieActivity extends AppCompatActivity {
         });
 
         // Fetch movies from ViewModel
-        movieViewModel.getAllMovies(); // This triggers fetching of the movies
+        movieViewModel.getAllMovies();
     }
 
-    private void populateDropdown(List<Movie> movies, Map<String, String> movieMap) {
+    private void populateDropdown(List<Movie> movies) {
         // Extract movie titles from Movie objects
         List<String> movieTitles = new ArrayList<>();
         for (Movie movie : movies) {
@@ -99,13 +89,13 @@ public class DeleteMovieActivity extends AppCompatActivity {
             movieMap.put(movie.getName(), movie.get_id());
         }
 
-        // Create an ArrayAdapter for the Spinner
+        // Create an ArrayAdapter for the Spinner with custom layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.custom_spinner_layout,  // Use your custom layout for the dropdown items
                 movieTitles
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_layout); // Set dropdown view to use the same custom layout
 
         // Set the adapter to the Spinner
         movieDropdown.setAdapter(adapter);
@@ -116,7 +106,6 @@ public class DeleteMovieActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedMovie = movieMap.get(movieTitles.get(position));
                 Toast.makeText(DeleteMovieActivity.this, "Selected: " + selectedMovie, Toast.LENGTH_SHORT).show();
-                // Additional logic can go here, e.g., deleting the movie or showing its details
             }
 
             @Override
@@ -126,8 +115,8 @@ public class DeleteMovieActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteSelectedMovie(String movieId){
-
+    private void deleteSelectedMovie(String movieId) {
+        // Use the ViewModel to delete the movie
         this.movieViewModel.deleteMovie(movieId);
     }
 }

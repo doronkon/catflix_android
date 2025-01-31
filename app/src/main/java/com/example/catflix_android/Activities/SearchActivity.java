@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.catflix_android.Adapters.MovieAdapter;
 import com.example.catflix_android.Entities.Movie;
+import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.Repositories.MovieRepository;
 import com.example.catflix_android.ViewModels.SearchViewModel;
@@ -26,6 +28,8 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView searchResultsRecyclerView;
+
+    private RecyclerView returnedMoviesRecyclerView;
     private MovieAdapter movieAdapter;
     private EditText searchInput;
     private SearchViewModel searchViewModel;
@@ -43,23 +47,32 @@ public class SearchActivity extends AppCompatActivity {
             return insets;
         });
 
+        if (savedInstanceState == null) {
+            HeaderFragment headerFragment = new HeaderFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.header_container, headerFragment); // Replace the container with the fragment
+            transaction.commit();
+        }
+
         // Initialize UI components
         searchInput = findViewById(R.id.searchInput);
-        searchResultsRecyclerView = findViewById(R.id.searchResultsRecyclerView);
 
         // Set up RecyclerView
-        searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        movieAdapter = new MovieAdapter(this);
-        searchResultsRecyclerView.setAdapter(movieAdapter);
+        // Initialize alreadyWatched RecyclerView
+        returnedMoviesRecyclerView = findViewById(R.id.movieList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager.setStackFromEnd(false);  // Ensures scrolling starts naturally from the top
+        returnedMoviesRecyclerView.setLayoutManager(layoutManager);
 
-        // Initialize ViewModel
-        MovieRepository movieRepository = new MovieRepository(this, this);
-        searchViewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
-            @Override
-            public <T extends ViewModel> T create(Class<T> modelClass) {
-                return (T) new SearchViewModel(movieRepository);
-            }
-        }).get(SearchViewModel.class);
+// Remove SnapHelper for smooth scrolling (optional)
+        returnedMoviesRecyclerView.setNestedScrollingEnabled(true);
+
+        // Initialize alreadyWatched Adapter
+        movieAdapter = new MovieAdapter(this);
+        returnedMoviesRecyclerView.setAdapter(movieAdapter);
+
+
+        searchViewModel = new SearchViewModel(this, this);
 
         // Observe search results
         searchViewModel.getSearchResults().observe(this, movies -> {

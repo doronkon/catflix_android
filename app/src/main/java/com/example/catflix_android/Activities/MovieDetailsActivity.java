@@ -72,9 +72,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
             TextView movieDescription = findViewById(R.id.movieDescription);
             movieDescription.setText(movie.getDescription());
 
-            TextView movieCategory = findViewById(R.id.movieCategory);
-            movieCategory.setText(movie.getCategory());
-
             TextView movieDirector = findViewById(R.id.movieDirector);
             movieDirector.setText(movie.getDirector());
 

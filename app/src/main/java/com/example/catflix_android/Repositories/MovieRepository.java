@@ -24,6 +24,7 @@ import java.util.List;
 public class MovieRepository {
     MutableLiveData<Boolean> finishedMongoPatch;
 
+    private MutableLiveData<List<Movie>> searchMovies;
     private MutableLiveData<Movie> currentMovie;
     private MutableLiveData<Boolean> finishedUpdate;
 
@@ -162,8 +163,16 @@ public class MovieRepository {
         this.api.editMovie(movieUpdate,this.finishedUpdate);
     }
 
-    public String searchMovies(String query, String results) {
-        return "a?";
+    public LiveData<List<Movie>> getSearchMovies()
+    {
+        if(searchMovies == null)
+        {
+            searchMovies = new MutableLiveData<>();
+        }
+        return this.searchMovies;
+    }
+    public void fetchSearchMovies(String query) {
+        this.api.fetchSearchMovies(this.searchMovies, query);
     }
 
 }

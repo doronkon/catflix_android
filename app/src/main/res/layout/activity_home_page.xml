@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cetflixblack">
@@ -22,8 +23,6 @@
             android:layout_marginTop="30dp">
 
 
-            <!--                android:layout_marginStart="auto"-->
-<!--                android:background="@drawable/button_background"-->
         </LinearLayout>
 
 
@@ -73,16 +72,6 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- Promoted Categories -->
-        <TextView
-            android:layout_width="112dp"
-            android:layout_height="41dp"
-            android:layout_margin="16dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Categories"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryRecyclerView"
             android:layout_width="match_parent"
@@ -94,7 +83,7 @@
             android:layout_width="112dp"
             android:layout_height="40dp"
             android:layout_margin="16dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/catfont"
             android:text="Watch Again"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />

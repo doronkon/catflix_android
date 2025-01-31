@@ -23,7 +23,6 @@ public class CategoryMoviesActivity extends AppCompatActivity {
     private CategoryViewModel categoryViewModel;
     private RecyclerView returnedMoviesRecyclerView;
     private MovieAdapter movieAdapter;
-    private RecyclerView categoryRecyclerView;
 
     @SuppressLint("SetTextI18n")
     @Override

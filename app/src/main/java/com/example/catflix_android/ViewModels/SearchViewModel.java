@@ -1,5 +1,8 @@
 package com.example.catflix_android.ViewModels;
 
+import android.content.Context;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,10 +13,13 @@ import java.util.List;
 
 public class SearchViewModel extends ViewModel {
     private final MutableLiveData<List<Movie>> searchResults = new MutableLiveData<>();
+    private final LifecycleOwner owner;
     private MovieRepository movieRepository;
 
-    public SearchViewModel(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public SearchViewModel(Context context, LifecycleOwner owner) {
+        this.owner = owner;
+
+        this.movieRepository = new MovieRepository(context, owner);
     }
 
     public MutableLiveData<List<Movie>> getSearchResults() {
@@ -21,6 +27,11 @@ public class SearchViewModel extends ViewModel {
     }
 
     public void searchMovies(String query) {
-        movieRepository.searchMovies(query, searchResults.toString());
+        this.movieRepository.getSearchMovies().observe(this.owner, returnedMovies->{
+            if (returnedMovies != null) {
+                this.searchResults.setValue(returnedMovies);
+            }
+         });
+        movieRepository.fetchSearchMovies(query);
     }
 }

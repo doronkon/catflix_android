@@ -99,11 +99,18 @@
 
             <!-- Category Selection -->
             <Spinner
-                android:id="@+id/dropdownCategory"
+                android:id="@+id/dropdownList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="20dp"
+                android:padding="12dp"
+                android:popupBackground="#1E1E1E"
+                android:background="@drawable/spinner_background"
+                android:dropDownVerticalOffset="70dp"
+                android:dropDownHorizontalOffset="5dp"
+                android:textColorHint="#FFFFFF"
+                android:fontFamily="sans-serif" />
 
             <!-- Upload Buttons -->
             <Button

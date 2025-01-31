@@ -6,29 +6,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#121212"
     tools:context=".Activities.EditAndDeleteCategory">
 
-    <!-- Header Container -->
+    <!-- Header Bar -->
     <FrameLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:padding="16dp">
 
+        <TextView
+            android:id="@+id/headerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit &amp; Delete Category"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+    </FrameLayout>
+
+    <!-- Dropdown Spinner -->
     <Spinner
         android:id="@+id/dropdownList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/select_option"/>
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:popupBackground="#1E1E1E"
+        android:background="@drawable/spinner_background"
+        android:dropDownVerticalOffset="70dp"
+        android:dropDownHorizontalOffset="5dp"
+        android:textColorHint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif" />
+
+    <!-- Delete Button -->
     <Button
         android:id="@+id/deleteSelectedCategoryBTN"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete selected Category"/>
+        android:text="Delete Selected Category"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D32F2F" />
 
+    <!-- Edit Button -->
     <Button
         android:id="@+id/editSelectedCategoryBTN"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit selected Category"/>
+        android:text="Edit Selected Category"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D32F2F" />
 
 </LinearLayout>

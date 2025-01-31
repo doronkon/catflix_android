@@ -44,4 +44,7 @@ public interface MovieWebService {
 
     @PATCH("movies/{id}")
     public Call <Void> editMovie(@Header("user") String token, @Path("id") String id, @Body Movie movie);
+
+    @GET("movies/search/{query}")
+    public Call<List<Movie>> fetchSearchMovies(@Header("user") String userToken, @Path("query") String query);
 }

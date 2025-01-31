@@ -7,47 +7,81 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/cetflixblack"
     tools:context=".Activities.AdminPageActivity">
 
     <!-- Header Container -->
-<FrameLayout
-android:id="@+id/header_container"
-android:layout_width="match_parent"
-android:layout_height="wrap_content" />
+    <FrameLayout
+        android:id="@+id/header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin Controls"
+        android:textColor="#FFFFFF"
+        android:background="#D32F2F"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
     <!-- Button to Delete Movie -->
-<Button
-android:id="@+id/toDeleteMovieBTN"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Delete movie"
-android:layout_gravity="center_horizontal"
-android:layout_marginTop="16dp" />
+    <Button
+        android:id="@+id/toDeleteMovieBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Movie"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D32F2F"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif"
+        android:elevation="4dp"
+        android:layout_gravity="center_horizontal" />
 
     <!-- Button to Delete Movie -->
     <Button
         android:id="@+id/toEditOrDeleteCategory"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete or Edit Category"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp" />
+        android:text="Edit/Delete Category"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D32F2F"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif"
+        android:elevation="4dp"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:id="@+id/toUploadCategory"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upload Category"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp" />
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D32F2F"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif"
+        android:elevation="4dp"
+        android:layout_gravity="center_horizontal" />
 
     <!-- Button to Delete Movie -->
     <Button
         android:id="@+id/toUploadMovie"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload movie"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp" />
+        android:text="Upload Movie"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#D32F2F"
+        android:layout_marginBottom="12dp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif"
+        android:elevation="4dp"
+        android:layout_gravity="center_horizontal" />
 
-    </LinearLayout>
+</LinearLayout>

@@ -59,8 +59,12 @@ public class EditCategoryPageActivity extends AppCompatActivity {
 
         String[] booleanOptions = {"True", "False"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, booleanOptions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.custom_spinner_layout,  // Use your custom layout for the dropdown items
+                booleanOptions
+        );
+        adapter.setDropDownViewResource(R.layout.custom_spinner_layout);
 
         booleanSpinner.setAdapter(adapter);
 
