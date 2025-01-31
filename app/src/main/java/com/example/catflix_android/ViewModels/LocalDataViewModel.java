@@ -18,6 +18,8 @@ public class LocalDataViewModel {
     MutableLiveData<List<User>> users;
     MutableLiveData<List<Movie>> movies;
     private MutableLiveData<Boolean> initComplete;
+    private MutableLiveData<Boolean> deleteComplete;
+
     private Context context;
 
     private LocalDataRepository repository;
@@ -33,6 +35,10 @@ public class LocalDataViewModel {
     public void init(){
         this.repository.init(initComplete);
     }
+    public void deleteRoom(){
+        this.repository.deleteRoom(deleteComplete);
+    }
+
     public LiveData<Boolean> getInitComplete() {
         if(initComplete == null)
         {
@@ -40,5 +46,13 @@ public class LocalDataViewModel {
         }
         return initComplete;
     }
+    public LiveData<Boolean> getDeleteComplete() {
+        if(deleteComplete == null)
+        {
+            deleteComplete = new MutableLiveData<>();
+        }
+        return deleteComplete;
+    }
+
 
 }

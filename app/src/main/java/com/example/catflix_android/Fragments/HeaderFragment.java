@@ -7,29 +7,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.catflix_android.Activities.AdminPageActivity;
-import com.example.catflix_android.Activities.CategoryActivity;
 import com.example.catflix_android.Activities.CategoryMoviesActivity;
-import com.example.catflix_android.Activities.DeleteMovieActivity;
 import com.example.catflix_android.Activities.HomePageActivity;
+import com.example.catflix_android.Activities.LoginActivity;
 import com.example.catflix_android.Activities.ProfileActivity;
-import com.example.catflix_android.Activities.UpdateMovieActivity;
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.Entities.Category;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.CategoryViewModel;
+import com.example.catflix_android.ViewModels.CurrentUserViewModel;
+import com.example.catflix_android.ViewModels.LocalDataViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class HeaderFragment extends Fragment {
+    private LocalDataViewModel localDataViewModel;
+
+    private CurrentUserViewModel currentUserViewModel;
+
     private CategoryViewModel categoryViewModel;
     private HashMap<String, String> categoryMap = new HashMap<>(); // Map category name to ID
     private String selectedCategoryId;
@@ -48,18 +55,17 @@ public class HeaderFragment extends Fragment {
 
         // Set up click listeners for "Home" and "Profile"
         TextView homeLink = rootView.findViewById(R.id.home_link);
-        TextView profileLink = rootView.findViewById(R.id.profile_link);
         TextView adminLink = rootView.findViewById(R.id.admin);
+        Button logoutBTN = rootView.findViewById(R.id.logoutBtn);
+
+
+
 
         homeLink.setOnClickListener(v -> {
             Intent homeIntent = new Intent(getActivity(), HomePageActivity.class);
             startActivity(homeIntent);
         });
 
-        profileLink.setOnClickListener(v -> {
-            Intent profileIntent = new Intent(getActivity(), ProfileActivity.class);
-            startActivity(profileIntent);
-        });
         if(!isAdmin){
             adminLink.setVisibility(View.VISIBLE);
             adminLink.setOnClickListener(v -> {
@@ -69,7 +75,22 @@ public class HeaderFragment extends Fragment {
         }
 
         //category drop down list
-        categoryViewModel = new CategoryViewModel(requireContext(),this);
+        categoryViewModel = new CategoryViewModel(requireContext(),getViewLifecycleOwner());
+        localDataViewModel = new LocalDataViewModel(requireContext(),getViewLifecycleOwner());
+        logoutBTN.setOnClickListener(v->{
+            //
+            localDataViewModel.getDeleteComplete().observe(getViewLifecycleOwner(),val->{
+                if(val)
+                {
+                    Intent intent = new Intent(requireContext(), LoginActivity.class);
+                    startActivity(intent);
+                    requireActivity().finish(); // Close the current activity
+                }
+            });
+            localDataViewModel.deleteRoom();
+
+        });
+
         Spinner dropdownList =  rootView.findViewById(R.id.dropdownList);
 
         // Initially empty list
@@ -124,6 +145,33 @@ public class HeaderFragment extends Fragment {
         });
         categoryViewModel.fetchCategories();
 
+        //pfp and logout
+        currentUserViewModel = new CurrentUserViewModel(requireContext(),getViewLifecycleOwner());
+        ImageView imageView = rootView.findViewById(R.id.imageView2);
+
+        imageView.setOnClickListener(v->{
+            Intent profileIntent = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(profileIntent);
+        });
+
+        currentUserViewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                String url = user.getImage();
+                if(url.charAt(0)=='.')
+                {
+                    url=url.substring(url.lastIndexOf('/')+1);
+                }
+                String imageUrl = "http://10.0.2.2:8080/media/userLogos/" + url;
+
+
+
+                Glide.with(requireActivity())
+                        .load(imageUrl)
+                        .into(imageView);
+            } else {
+                //onFailure/404,403....
+            }
+        });
 
         return rootView;
     }

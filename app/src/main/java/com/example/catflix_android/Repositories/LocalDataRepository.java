@@ -11,6 +11,7 @@ import com.example.catflix_android.APIs.UserAPI;
 import com.example.catflix_android.AppDB;
 import com.example.catflix_android.Daos.MovieDao;
 import com.example.catflix_android.Daos.UserDao;
+import com.example.catflix_android.DataManager;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Entities.User;
 
@@ -101,6 +102,20 @@ public class LocalDataRepository {
                 // Handle error or failure case
             }
         });
+
+    }
+    public void deleteRoom(MutableLiveData<Boolean> deleteComplete) {
+        Thread deleteThread = new Thread(() -> {this.daoUser.deleteAll();this.daoMovie.deleteAll();});
+// Wait for the delete thread to finish without blocking the main thread.
+        deleteThread.start();
+        try {
+            deleteThread.join();
+            DataManager.reset();
+            deleteComplete.setValue(true);
+        } catch (Exception ex) {
+            Log.w("THREAD ERROR", ex);
+            Thread.currentThread().interrupt();
+        }
 
     }
 
