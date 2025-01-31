@@ -1,7 +1,9 @@
 package com.example.catflix_android.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
         TextView textBoxDisplayName = findViewById(R.id.textDisplayName);
+        Button editProfileBtn = findViewById(R.id.editProfileButton);
+        editProfileBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        });
         currentUserViewModel = new CurrentUserViewModel(this,this);
 
 

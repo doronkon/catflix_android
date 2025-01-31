@@ -35,7 +35,7 @@ import java.util.List;
 public class HeaderFragment extends Fragment {
     private LocalDataViewModel localDataViewModel;
 
-    private CurrentUserViewModel currentUserViewModel;
+    private CurrentUserViewModel currentUserViewModel2;
 
     private CategoryViewModel categoryViewModel;
     private HashMap<String, String> categoryMap = new HashMap<>(); // Map category name to ID
@@ -146,7 +146,7 @@ public class HeaderFragment extends Fragment {
         categoryViewModel.fetchCategories();
 
         //pfp and logout
-        currentUserViewModel = new CurrentUserViewModel(requireContext(),getViewLifecycleOwner());
+        currentUserViewModel2 = new CurrentUserViewModel(requireContext(),getViewLifecycleOwner());
         ImageView imageView = rootView.findViewById(R.id.imageView2);
 
         imageView.setOnClickListener(v->{
@@ -154,7 +154,7 @@ public class HeaderFragment extends Fragment {
             startActivity(profileIntent);
         });
 
-        currentUserViewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> {
+        currentUserViewModel2.getCurrentUser().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 String url = user.getImage();
                 if(url.charAt(0)=='.')
