@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.catflix_android.Activities.AdminPageActivity;
 import com.example.catflix_android.Activities.CategoryMoviesActivity;
 import com.example.catflix_android.Activities.HomePageActivity;
@@ -83,6 +84,7 @@ public class HeaderFragment extends Fragment {
                 if(val)
                 {
                     Intent intent = new Intent(requireContext(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     requireActivity().finish(); // Close the current activity
                 }
@@ -167,6 +169,8 @@ public class HeaderFragment extends Fragment {
 
                 Glide.with(requireActivity())
                         .load(imageUrl)
+                        .skipMemoryCache(true)  // Skip memory cache
+                        .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip disk cache
                         .into(imageView);
             } else {
                 //onFailure/404,403....

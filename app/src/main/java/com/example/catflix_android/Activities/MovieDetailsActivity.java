@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.catflix_android.Adapters.MovieAdapter;
 import com.example.catflix_android.Entities.Movie;
 import com.example.catflix_android.Fragments.HeaderFragment;
@@ -92,6 +93,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
             Glide.with(MovieDetailsActivity.this)
                     .load(imageUrl)
+                    .skipMemoryCache(true)  // Skip memory cache
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip disk cache
                     .into(imageView);
 
             // Initialize the "Watch Movie" button

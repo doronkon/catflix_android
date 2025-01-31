@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.CurrentUserViewModel;
@@ -67,6 +68,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Glide.with(ProfileActivity.this)
                         .load(imageUrl)
+                        .skipMemoryCache(true)  // Skip memory cache
+                        .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip disk cache
                         .into(imageView);
             } else {
                 //onFailure/404,403....
