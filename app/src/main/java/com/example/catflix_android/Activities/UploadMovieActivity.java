@@ -116,6 +116,9 @@ public class UploadMovieActivity extends AppCompatActivity {
         model.getUploadedMovie().observe(this, movie -> {
             if (movie != null) {
                 Toast.makeText(this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UploadMovieActivity.this, AdminPageActivity.class);
+                startActivity(intent);
+                this.finish();
             } else {
                 Toast.makeText(this, "Upload failed. Please check your network connection.", Toast.LENGTH_SHORT).show();
             }
