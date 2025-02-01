@@ -1,5 +1,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="8dp"
@@ -50,6 +51,8 @@
 
         <!-- Spacer to push the logout button to the right -->
 
+
+        <!-- Logout Button -->
         <Button
             android:id="@+id/themeToggleBtn"
             android:layout_width="wrap_content"
@@ -63,16 +66,26 @@
             android:textColor="?attr/colorOnPrimary"
             android:textSize="18sp" />
 
-        <!-- Logout Button -->
         <Button
-            android:id="@+id/logoutBtn"
+            android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:backgroundTint="?attr/colorAccent"
-            android:padding="8dp"
-            android:text="Logout"
-            android:textColor="?attr/colorOnPrimary" />
+            android:layout_marginLeft="28dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:text="🔍"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Logout"
+            android:src="@android:drawable/ic_lock_power_off" />
     </LinearLayout>
 
     <Spinner

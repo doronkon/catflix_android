@@ -11,8 +11,8 @@
 
     <RelativeLayout
         android:id="@+id/header_container"
-        android:layout_width="match_parent"
-        android:layout_height="193dp"
+        android:layout_width="395dp"
+        android:layout_height="179dp"
         android:background="?attr/android:windowBackground"
         android:padding="16dp">
 
@@ -51,17 +51,14 @@
             android:src="@drawable/profile_placeholder" />
 
         <!-- Logout Button (Aligned to the Right) -->
-        <Button
+        <ImageButton
             android:id="@+id/logoutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/red"
-            android:padding="8dp"
-            android:text="Logout"
-            android:textColor="#FFFFFF" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Logout"
+            android:src="@android:drawable/ic_lock_power_off"
+            />
     </RelativeLayout>
 
     <ScrollView
@@ -80,59 +77,71 @@
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
+                android:layout_height="50dp"
                 android:hint="Name"
                 android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/edittext_bg"
                 android:padding="12dp"
-                android:textColor="#000000" />
+                android:gravity="center_vertical"/>
 
             <EditText
                 android:id="@+id/editTextDirector"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
+                android:layout_height="50dp"
                 android:hint="Director"
                 android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/edittext_bg"
                 android:padding="12dp"
-                android:textColor="#000000" />
+                android:gravity="center_vertical"/>
 
             <EditText
                 android:id="@+id/editTextActors"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
+                android:layout_height="50dp"
                 android:hint="Actors"
                 android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/edittext_bg"
                 android:padding="12dp"
-                android:textColor="#000000" />
+                android:gravity="center_vertical"/>
 
             <EditText
                 android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
+                android:layout_height="100dp"
                 android:hint="Description"
                 android:inputType="textMultiLine"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/edittext_bg"
                 android:padding="12dp"
-                android:textColor="#000000" />
+                android:gravity="top"/>
 
             <EditText
                 android:id="@+id/editTextMinimalAge"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray"
+                android:layout_height="50dp"
                 android:hint="Minimal Age"
                 android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/edittext_bg"
                 android:padding="12dp"
-                android:textColor="#000000" />
+                android:gravity="center_vertical"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Catflix Original:"
-                android:textColor="#FFFFFF" />
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <RadioGroup
                 android:id="@+id/radioGroupCatflixOriginal"
@@ -145,14 +154,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="True"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="?attr/colorOnPrimary"/>
 
                 <RadioButton
                     android:id="@+id/radioFalse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="False"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="?attr/colorOnPrimary"/>
             </RadioGroup>
 
             <Spinner

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +21,7 @@
         <RelativeLayout
             android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="188dp"
             android:layout_marginTop="20dp"
             android:background="?attr/android:windowBackground"
             android:padding="16dp">
@@ -60,17 +61,14 @@
                 android:src="@drawable/profile_placeholder" />
 
             <!-- Logout Button (Aligned to the Right) -->
-            <Button
+            <ImageButton
                 android:id="@+id/logoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/red"
-                android:padding="8dp"
-                android:text="Logout"
-                android:textColor="#FFFFFF" />
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Logout"
+                android:src="@android:drawable/ic_lock_power_off"
+                />
         </RelativeLayout>
 
         <FrameLayout

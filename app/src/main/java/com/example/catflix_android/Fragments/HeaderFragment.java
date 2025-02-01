@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.example.catflix_android.Activities.CategoryMoviesActivity;
 import com.example.catflix_android.Activities.HomePageActivity;
 import com.example.catflix_android.Activities.LoginActivity;
 import com.example.catflix_android.Activities.ProfileActivity;
+import com.example.catflix_android.Activities.SearchActivity;
 import com.example.catflix_android.DataManager;
 import com.example.catflix_android.Entities.Category;
 import com.example.catflix_android.R;
@@ -70,7 +72,7 @@ public class HeaderFragment extends Fragment {
         // Set up click listeners for "Home" and "Profile"
         TextView homeLink = rootView.findViewById(R.id.home_link);
         TextView adminLink = rootView.findViewById(R.id.admin);
-        Button logoutBTN = rootView.findViewById(R.id.logoutBtn);
+        ImageButton logoutBTN = rootView.findViewById(R.id.logoutBtn);
 
         Button themeToggleBtn = rootView.findViewById(R.id.themeToggleBtn);
 
@@ -216,6 +218,12 @@ public class HeaderFragment extends Fragment {
             } else {
                 //onFailure/404,403....
             }
+        });
+        Button btn = rootView.findViewById(R.id.searchBtn);
+
+        btn.setOnClickListener(v -> {
+            Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(searchIntent);
         });
 
         return rootView;

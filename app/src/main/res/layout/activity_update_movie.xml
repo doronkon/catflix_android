@@ -6,15 +6,57 @@
     android:background="?attr/android:windowBackground">
 
     <!-- Header Container (Fixed at the Top) -->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/header_container"
-        android:layout_width="378dp"
-        android:layout_height="192dp"
-        android:layout_alignParentTop="true"
-        android:background="#1A1A1A"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp" /> <!-- Fix header at the top -->
+        android:layout_width="391dp"
+        android:layout_height="182dp"
+        android:layout_marginTop="20dp"
+        android:background="?attr/android:windowBackground"
+        android:padding="16dp">
+
+        <!-- Home Link -->
+        <TextView
+            android:id="@+id/home_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Admin Link -->
+        <TextView
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/home_link"
+            android:text="Admin"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Profile Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/admin"
+            android:src="@drawable/profile_placeholder" />
+
+        <!-- Logout Button (Aligned to the Right) -->
+        <ImageButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Logout"
+            android:src="@android:drawable/ic_lock_power_off" />
+    </RelativeLayout>
 
     <!-- Scrollable Content -->
     <ScrollView
@@ -35,65 +77,78 @@
                 android:text="You are editing: "
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnPrimary"
                 android:layout_marginBottom="16dp"/>
 
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:hint="Name"
                 android:inputType="text"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:background="?attr/colorSecondary"/>
+                android:textColorHint="@color/white"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:gravity="center_vertical"/>
 
             <EditText
                 android:id="@+id/editTextDirector"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:hint="Director"
                 android:inputType="text"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:background="?attr/colorSecondary"/>
+                android:textColorHint="@color/white"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:gravity="center_vertical"/>
 
             <EditText
                 android:id="@+id/editTextActors"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:hint="Actors"
                 android:inputType="text"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:background="?attr/colorSecondary"/>
+                android:textColorHint="@color/white"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:gravity="center_vertical"/>
 
             <EditText
                 android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:hint="Description"
                 android:inputType="textMultiLine"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:background="?attr/colorSecondary"/>
+                android:textColorHint="@color/white"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:gravity="top"/>
 
             <EditText
                 android:id="@+id/editTextMinimalAge"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:hint="Minimal Age"
                 android:inputType="number"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:background="?attr/colorSecondary"/>
+                android:textColorHint="@color/white"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:gravity="center_vertical"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Catflix Original:"
-                android:textColor="@color/white"/>
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
 
             <RadioGroup
                 android:id="@+id/radioGroupCatflixOriginal"
@@ -106,14 +161,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="True"
-                    android:textColor="@color/white"/>
+                    android:textColor="?attr/colorOnPrimary"/>
 
                 <RadioButton
                     android:id="@+id/radioFalse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="False"
-                    android:textColor="@color/white"/>
+                    android:textColor="?attr/colorOnPrimary"/>
             </RadioGroup>
 
             <!-- Category Selection -->
