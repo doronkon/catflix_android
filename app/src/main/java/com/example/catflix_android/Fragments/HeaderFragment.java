@@ -71,7 +71,6 @@ public class HeaderFragment extends Fragment {
 
         // Set up click listeners for "Home" and "Profile"
         TextView homeLink = rootView.findViewById(R.id.home_link);
-        TextView adminLink = rootView.findViewById(R.id.admin);
         ImageButton logoutBTN = rootView.findViewById(R.id.logoutBtn);
 
         Button themeToggleBtn = rootView.findViewById(R.id.themeToggleBtn);
@@ -110,12 +109,16 @@ public class HeaderFragment extends Fragment {
             startActivity(homeIntent);
         });
 
-        if(!isAdmin){
+        TextView adminLink = rootView.findViewById(R.id.admin);
+
+        if (isAdmin) {
             adminLink.setVisibility(View.VISIBLE);
             adminLink.setOnClickListener(v -> {
                 Intent adminIntent = new Intent(getActivity(), AdminPageActivity.class);
                 startActivity(adminIntent);
             });
+        } else {
+            adminLink.setVisibility(View.GONE);  // Hide the TextView when isAdmin is false
         }
 
         //category drop down list
