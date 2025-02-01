@@ -63,6 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".Activities.HomePageActivity"
+            android:theme="@style/Theme.Catflix_android"
             android:exported="false" />
         <activity
             android:name=".Activities.SignUpActivity"

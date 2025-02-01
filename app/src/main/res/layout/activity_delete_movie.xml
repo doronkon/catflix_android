@@ -7,27 +7,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#121212"
+    android:background="?attr/android:windowBackground"
     tools:context=".Activities.DeleteMovieActivity">
 
 
     <!-- Header Bar -->
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
+        android:layout_height="193dp"
+        android:background="?attr/android:windowBackground"
         android:padding="16dp">
 
+        <!-- Home Link -->
         <TextView
-            android:id="@+id/headerTitle"
+            android:id="@+id/home_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete Movie"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
-    </FrameLayout>
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Admin Link -->
+        <TextView
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/home_link"
+            android:text="Admin"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Profile Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/admin"
+            android:src="@drawable/profile_placeholder" />
+
+        <!-- Logout Button (Aligned to the Right) -->
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/red"
+            android:padding="8dp"
+            android:text="Logout"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
 
     <Spinner
         android:id="@+id/movieDropdown"

@@ -3,83 +3,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/cetflixblack"> <!-- Custom Background -->
+    android:background="?attr/android:windowBackground"> <!-- Custom Background -->
 
     <!-- Header Container -->
-    <LinearLayout
-        android:id="@+id/header_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:background="#1A1A1A"
-        android:layout_alignParentTop="true">
-
-    </LinearLayout>
 
     <!-- Scrollable Content -->
-    <ScrollView
+
+    <RelativeLayout
+        android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header_container">
+        android:layout_height="193dp"
+        android:background="?attr/android:windowBackground"
+        android:padding="16dp">
+
+        <!-- Home Link -->
+        <TextView
+            android:id="@+id/home_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Admin Link -->
+        <TextView
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/home_link"
+            android:text="Admin"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Profile Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/admin"
+            android:src="@drawable/profile_placeholder" />
+
+        <!-- Logout Button (Aligned to the Right) -->
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/red"
+            android:padding="8dp"
+            android:text="Logout"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="482dp"
+        android:layout_height="883dp"
+        android:layout_below="@id/header_container"
+        android:layout_marginTop="35dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/cetflixblack"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@color/cetflixblack"> <!-- Semi-transparent background -->
+            android:padding="16dp"> <!-- Semi-transparent background -->
 
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray"
                 android:hint="Name"
-                android:background="#333333"
-                android:textColor="#FFFFFF"
+                android:inputType="text"
                 android:padding="12dp"
-                android:inputType="text" />
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/editTextDirector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray"
                 android:hint="Director"
-                android:background="#333333"
-                android:textColor="#FFFFFF"
+                android:inputType="text"
                 android:padding="12dp"
-                android:inputType="text" />
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/editTextActors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray"
                 android:hint="Actors"
-                android:background="#333333"
-                android:textColor="#FFFFFF"
+                android:inputType="text"
                 android:padding="12dp"
-                android:inputType="text" />
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray"
                 android:hint="Description"
-                android:background="#333333"
-                android:textColor="#FFFFFF"
+                android:inputType="textMultiLine"
                 android:padding="12dp"
-                android:inputType="textMultiLine" />
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/editTextMinimalAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray"
                 android:hint="Minimal Age"
-                android:background="#333333"
-                android:textColor="#FFFFFF"
+                android:inputType="number"
                 android:padding="12dp"
-                android:inputType="number" />
+                android:textColor="#000000" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,42 +159,42 @@
                 android:id="@+id/dropdownCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/spinner_background"
+                android:dropDownHorizontalOffset="5dp"
+                android:dropDownVerticalOffset="0dp"
+                android:fontFamily="sans-serif"
                 android:padding="12dp"
                 android:popupBackground="#1E1E1E"
-                android:background="@drawable/spinner_background"
-                android:dropDownVerticalOffset="70dp"
-                android:dropDownHorizontalOffset="5dp"
-                android:textColorHint="#FFFFFF"
-                android:fontFamily="sans-serif" />
+                android:spinnerMode="dropdown"
+                android:textColorHint="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonUploadThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Upload Thumbnail"
                 android:backgroundTint="#D32F2F"
-                android:textColor="#FFFFFF"/>
+                android:text="Upload Thumbnail"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonUploadVideo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Upload Video"
                 android:backgroundTint="#D32F2F"
-                android:textColor="#FFFFFF"/>
+                android:text="Upload Video"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonUploadMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Upload Movie"
                 android:backgroundTint="#D32F2F"
-                android:textColor="#FFFFFF"/>
+                android:text="Upload Movie"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </ScrollView>

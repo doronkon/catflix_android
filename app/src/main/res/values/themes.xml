@@ -1,9 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Catflix_android" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#838080</item>
+        <item name="colorOnPrimary">#141414</item>
+        <item name="colorAccent">#D32F2F</item>
+        <item name="colorSecondary">#C3B7B7</item>
+        <item name="android:windowBackground">#EBEBEB</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
-
     <style name="Theme.Catflix_android" parent="Base.Theme.Catflix_android" />
 </resources>

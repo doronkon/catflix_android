@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#121212"
+    android:background="?attr/android:windowBackground"
     android:padding="16dp"
     tools:context=".Activities.SearchActivity">
 
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="#141414"
+        android:background="?attr/android:windowBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp">

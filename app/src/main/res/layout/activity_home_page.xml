@@ -4,29 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cetflixblack">
+    android:background="?attr/android:windowBackground">
 
+    <!-- Root Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
-        <!-- Header Container -->
-        <LinearLayout
-            android:id="@+id/header_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="16dp"
-            android:background="#141414"
-            android:layout_marginTop="30dp">
+        android:padding="0dp">
 
-
-        </LinearLayout>
-
+        <!-- Full-Width Header -->
 
         <!-- Banner Section -->
+
+        <RelativeLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_marginTop="20dp"
+            android:background="?attr/android:windowBackground"
+            android:padding="16dp">
+
+            <!-- Home Link -->
+            <TextView
+                android:id="@+id/home_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:text="Home"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <!-- Admin Link -->
+            <TextView
+                android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/home_link"
+                android:text="Admin"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <!-- Profile Image -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/admin"
+                android:src="@drawable/profile_placeholder" />
+
+            <!-- Logout Button (Aligned to the Right) -->
+            <Button
+                android:id="@+id/logoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/red"
+                android:padding="8dp"
+                android:text="Logout"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -36,15 +82,14 @@
                 android:id="@+id/videoBanner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/banner_placeholder"
+                android:layout_marginLeft="20dp"
                 android:contentDescription="Featured Content"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
                 android:layout_gravity="end|center_vertical"
@@ -59,7 +104,7 @@
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:textColor="#FFFFFF"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/playButton"
@@ -68,7 +113,7 @@
                     android:layout_marginTop="8dp"
                     android:backgroundTint="#D32F2F"
                     android:text="Play Now"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"/>
             </LinearLayout>
         </FrameLayout>
 
@@ -76,22 +121,22 @@
             android:id="@+id/categoryRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"/>
 
         <!-- Watch Again Section -->
         <TextView
-            android:layout_width="112dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:fontFamily="@font/catfont"
             android:text="Watch Again"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textColor="?attr/android:textColor"
+            android:textSize="24sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movieList"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

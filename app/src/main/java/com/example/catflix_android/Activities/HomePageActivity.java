@@ -29,10 +29,15 @@ import com.example.catflix_android.Fragments.HeaderFragment;
 import com.example.catflix_android.R;
 import com.example.catflix_android.ViewModels.MovieViewModel;
 
+import android.content.SharedPreferences;
+import androidx.appcompat.app.AppCompatDelegate;
+
+
 import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
-
+    private static final String PREFS_NAME = "theme_prefs";
+    private static final String KEY_THEME = "isDarkMode";
     private RecyclerView returnedMoviesRecyclerView;
     private MovieAdapter movieAdapter;
     private RecyclerView categoryRecyclerView;
@@ -40,6 +45,16 @@ public class HomePageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", true);
+
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);

@@ -29,6 +29,9 @@ import com.example.catflix_android.ViewModels.CategoryViewModel;
 import com.example.catflix_android.ViewModels.CurrentUserViewModel;
 import com.example.catflix_android.ViewModels.LocalDataViewModel;
 
+import android.content.SharedPreferences;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +54,16 @@ public class HeaderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         boolean isAdmin = DataManager.getIsAdmin();
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", 0);
+        boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", true); // Default: Dark Mode
+
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_header, container, false);
 
@@ -59,6 +72,34 @@ public class HeaderFragment extends Fragment {
         TextView adminLink = rootView.findViewById(R.id.admin);
         Button logoutBTN = rootView.findViewById(R.id.logoutBtn);
 
+        Button themeToggleBtn = rootView.findViewById(R.id.themeToggleBtn);
+
+        // Set initial icon based on current mode
+        if (isDarkMode) {
+            themeToggleBtn.setText("️☀️"); // Moon icon for Dark Mode
+        } else {
+            themeToggleBtn.setText("🌙"); // Sun icon for Light Mode
+        }
+
+        themeToggleBtn.setOnClickListener(v -> {
+            boolean newMode = !isDarkMode; // Toggle mode
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isDarkMode", newMode);
+            editor.apply();
+
+            // Apply theme change
+            if (newMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+
+            // Restart entire app to apply theme across all activities
+            Intent intent = new Intent(requireActivity(), HomePageActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            requireActivity().finish(); // Close current activity
+        });
 
 
 
@@ -101,10 +142,10 @@ public class HeaderFragment extends Fragment {
         // Adapter for the Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 requireContext(),
-                android.R.layout.simple_spinner_item, // Layout for each item
+                R.layout.custom_spinner_layout, // Layout for each item
                 items
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_layout);
         dropdownList.setAdapter(adapter);
         categoryViewModel.getCategories().observe(getViewLifecycleOwner(),categories-> {
             if (categories != null)

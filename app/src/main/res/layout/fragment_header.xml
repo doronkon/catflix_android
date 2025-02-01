@@ -1,79 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:padding="8dp"
-    android:background="#090808">
+    android:background="?attr/colorPrimary">
 
-    <!-- Logo Image -->
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/catflix_logo"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:contentDescription="App Logo" />
+    <!-- Header Container -->
 
-    <!-- Home Link -->
-    <TextView
-        android:id="@+id/home_link"
+    <!-- Spinner -->
+
+    <LinearLayout
+        android:id="@+id/header_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="18sp"
-        android:textColor="#AF1D1D"
-        android:layout_toEndOf="@id/logo"
-        android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"/>
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
+        <!-- Home Link -->
+        <TextView
+            android:id="@+id/home_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Home"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="18sp" />
 
-    <!-- Admin Link -->
-    <TextView
-        android:id="@+id/admin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin"
-        android:textSize="18sp"
-        android:textColor="#AF1D1D"
-        android:layout_toEndOf="@id/home_link"
-        android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"/>
+        <!-- Admin Link -->
+        <TextView
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Admin"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="18sp" />
 
-    <!-- Spinner (Now Below Admin) -->
+        <!-- Profile Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_placeholder" />
+
+        <!-- Spacer to push the logout button to the right -->
+
+        <Button
+            android:id="@+id/themeToggleBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:text="☀️"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="18sp" />
+
+        <!-- Logout Button -->
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:backgroundTint="?attr/colorAccent"
+            android:padding="8dp"
+            android:text="Logout"
+            android:textColor="?attr/colorOnPrimary" />
+    </LinearLayout>
+
     <Spinner
         android:id="@+id/dropdownList"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/header_container"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/spinner_background"
+        android:dropDownHorizontalOffset="5dp"
+        android:dropDownVerticalOffset="70dp"
+        android:fontFamily="sans-serif"
+        android:padding="8dp"
+        android:popupBackground="?attr/colorPrimary"
         android:spinnerMode="dropdown"
-        android:prompt="@string/select_option"
-        android:layout_below="@id/admin"
-        android:layout_marginTop="16dp"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile_placeholder"
-        android:layout_toEndOf="@id/admin"
-        android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"
-        app:strokeWidth="2dp"
-        app:strokeColor="@android:color/black"
-        app:shapeAppearanceOverlay="@style/RoundImage"/>
-
-    <Button
-
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:text="Logout"
-        android:layout_toEndOf="@id/imageView2"
-        />
-
-
+        android:text="Categories"
+        android:textColorHint="?attr/android:textColor" />
 </RelativeLayout>

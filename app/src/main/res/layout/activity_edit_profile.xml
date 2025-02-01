@@ -1,49 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="?attr/android:windowBackground"
     tools:context=".Activities.SignUpActivity">
 
     <!-- Header Container -->
-    <LinearLayout
+
+    <!-- Logo -->
+
+    <!-- Profile Picture Section -->
+
+    <!-- Choose Image Button -->
+
+    <RelativeLayout
         android:id="@+id/header_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#1A1A1A"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_width="408dp"
+        android:layout_height="123dp"
+        android:background="?attr/android:windowBackground"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/imgSelected"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="2dp"
+        tools:ignore="MissingConstraints">
 
-    </LinearLayout>
+        <!-- Home Link -->
+        <TextView
+            android:id="@+id/home_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
-    <!-- Logo (Optional) -->
+        <!-- Admin Link -->
+        <TextView
+            android:id="@+id/admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/home_link"
+            android:text="Admin"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Profile Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/admin"
+            android:src="@drawable/profile_placeholder" />
+
+        <!-- Logout Button (Aligned to the Right) -->
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/red"
+            android:padding="8dp"
+            android:text="Logout"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:visibility="gone"
+        android:layout_marginTop="52dp"
         android:contentDescription="@string/app_name"
         android:scaleType="fitCenter"
         android:src="@drawable/catflix_logo"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/header_container" />
 
-    <!-- Profile Picture Section -->
     <ImageView
         android:id="@+id/imgSelected"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="109dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="300dp"
         android:background="@color/gray"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,58 +102,63 @@
 
     <Button
         android:id="@+id/btnChooseImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/red"
         android:text="@string/chooseImage"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:drawablePadding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/imgSelected"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSelected" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Take Photo Button -->
     <Button
         android:id="@+id/btnCameraImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/red"
         android:text="@string/take_photo"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:drawablePadding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnChooseImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChooseImage" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Display Name Input -->
 
+    <!-- Edit Profile Button -->
     <EditText
         android:id="@+id/displayName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
+        android:layout_marginTop="48dp"
         android:hint="@string/displayName"
-        android:textColor="@color/white"
-        android:textColorHint="@color/gray"
         android:inputType="text"
         android:padding="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCameraImage" />
+        app:layout_constraintTop_toBottomOf="@id/btnCameraImage" />
 
-
-
-    <!-- Sign Up Button -->
     <Button
         android:id="@+id/editProfileBTN"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/red"
         android:text="Edit Profile"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayName" />
+        app:layout_constraintTop_toBottomOf="@id/displayName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

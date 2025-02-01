@@ -2,18 +2,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?attr/android:windowBackground">
 
     <!-- Header Container (Fixed at the Top) -->
     <LinearLayout
         android:id="@+id/header_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
+        android:layout_width="378dp"
+        android:layout_height="192dp"
+        android:layout_alignParentTop="true"
         android:background="#1A1A1A"
-        android:layout_alignParentTop="true"/> <!-- Fix header at the top -->
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp" /> <!-- Fix header at the top -->
 
     <!-- Scrollable Content -->
     <ScrollView
@@ -34,6 +35,7 @@
                 android:text="You are editing: "
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:layout_marginBottom="16dp"/>
 
             <EditText
@@ -41,41 +43,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="?attr/colorSecondary"/>
 
             <EditText
                 android:id="@+id/editTextDirector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Director"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="?attr/colorSecondary"/>
 
             <EditText
                 android:id="@+id/editTextActors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Actors"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="?attr/colorSecondary"/>
 
             <EditText
                 android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Description"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="?attr/colorSecondary"/>
 
             <EditText
                 android:id="@+id/editTextMinimalAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Minimal Age"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:background="?attr/colorSecondary"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Catflix Original:" />
+                android:text="Catflix Original:"
+                android:textColor="@color/white"/>
 
             <RadioGroup
                 android:id="@+id/radioGroupCatflixOriginal"
@@ -87,14 +105,15 @@
                     android:id="@+id/radioTrue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="True" />
+                    android:text="True"
+                    android:textColor="@color/white"/>
 
                 <RadioButton
                     android:id="@+id/radioFalse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="False" />
-
+                    android:text="False"
+                    android:textColor="@color/white"/>
             </RadioGroup>
 
             <!-- Category Selection -->
@@ -106,10 +125,8 @@
                 android:layout_marginTop="20dp"
                 android:padding="12dp"
                 android:popupBackground="#1E1E1E"
-                android:background="@drawable/spinner_background"
-                android:dropDownVerticalOffset="70dp"
-                android:dropDownHorizontalOffset="5dp"
-                android:textColorHint="#FFFFFF"
+                android:background="@color/gray"
+                android:textColorHint="@color/white"
                 android:fontFamily="sans-serif" />
 
             <!-- Upload Buttons -->
@@ -118,23 +135,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Upload Thumbnail" />
+                android:text="Upload Thumbnail"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/buttonUploadVideo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Upload Video" />
+                android:text="Upload Video"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/buttonUploadMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Edit Movie" />
-
+                android:text="Edit Movie"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>
